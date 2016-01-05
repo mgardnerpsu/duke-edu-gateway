@@ -1,0 +1,1 @@
+web: gunicorn edugway.wsgi --log-file -
