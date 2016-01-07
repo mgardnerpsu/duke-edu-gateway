@@ -7,7 +7,12 @@ django-toolbelt==0.0.1
 djangorestframework==3.3.2
 gunicorn==19.4.5
 Markdown==2.6.5
+pbr==1.8.1
 psycopg2==2.6.1
 six==1.10.0
 static3==0.6.1
+stevedore==1.10.0
+virtualenv==13.1.2
+virtualenv-clone==0.2.6
+virtualenvwrapper==4.7.1
 wheel==0.24.0
