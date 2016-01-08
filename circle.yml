@@ -1,0 +1,9 @@
+deployment:
+  heroku-dev:
+    branch: develop
+    heroku:
+      appname: edugway-dev
+  heroku-uatest:
+    branch: uatest
+    heroku:
+      appname: edugway-uatest
