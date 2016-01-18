@@ -31,12 +31,14 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
+    #'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'django.contrib.messages',
+    #'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'edugway.forms',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -120,10 +122,21 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# Include settings required for standard Heroku deploy...
+############################################################
+# Django REST framework settings
+############################################################
+REST_FRAMEWORK = {
+    #'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
+    'PAGE_SIZE': 10,
+    'TEST_REQUEST_DEFAULT_FORMAT': 'json'
+}
+
+############################################################
+# Settings per Heroku guidlines
+############################################################
 # Parse database configuration from $DATABASE_URL
 import dj_database_url
-DATABASES['default'] =  dj_database_url.config()
+#DATABASES['default'] =  dj_database_url.config()
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
@@ -140,4 +153,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
-# End Heroku settings...
+#############################################################
+# End Heroku settings
+#############################################################
+
