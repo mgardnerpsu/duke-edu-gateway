@@ -4,7 +4,7 @@ from django.db import models
 class Form(models.Model):
     '''
     A form and its composite models contain the metadata (fields, field coices, etc.) 
-    required to define an assessment/evaluation that can be associated to a course.
+    required to define an assessment/evaluation that may be associated to a course.
     '''
     class Meta:
     	db_table = 'form'
@@ -28,12 +28,12 @@ class Form(models.Model):
 
 class Field(models.Model):
     '''
-    A field (question) is contained within a form.
+    A field (question) contained within a form.
     '''
     class Meta:
         db_table = 'field'
         verbose_name = u'Form Field'
-        ordering = ('form', 'number')
+        ordering = ('form', 'sequence')
         
     TYPE_RADIO = u'multi-choice-radio'
     TYPE_DROPDOWN = u'multi-choice-dropdown'
@@ -48,7 +48,23 @@ class Field(models.Model):
     
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     form = models.ForeignKey(Form, related_name=u'fields')
+    sequence = models.IntegerField(u'Display Sequence')
     type = models.CharField(u'Type', max_length=50, choices=TYPE_CHOICES)
-    number = models.IntegerField(u'Number')
-    name = models.CharField(u'Name (Variable)', max_length=50)
+    name = models.CharField(u'Field Name', max_length=50)
     label = models.TextField(u'Label (Question)')
+
+class Choice(models.Model):
+    '''
+    A choice (answer) for a field (question).
+    '''
+    class Meta:
+        db_table = 'choice'
+        verbose_name = u'Field Choice'
+        ordering = ('field', 'sequence')
+     
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)   
+    field = models.ForeignKey(Field, related_name='choices')
+    sequence = models.IntegerField(u'Display Sequence')
+    name = models.CharField(u'Choice Name', max_length=50)
+    label = models.TextField(u'Label (Answer)')
+    is_correct = models.BooleanField('Is Correct Choice?', default=False)

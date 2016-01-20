@@ -22,6 +22,7 @@ from edugway.forms import views as forms_views
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'forms', forms_views.FormViewSet)
 router.register(r'fields', forms_views.FieldViewSet, base_name='form-fields')
+router.register(r'choices', forms_views.ChoiceViewSet, base_name='field-choices')
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
