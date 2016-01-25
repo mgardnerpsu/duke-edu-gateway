@@ -127,6 +127,8 @@ class ReSequenceChoicesTests(APITestCase):
 		# get all the choices for visual review
 		url = reverse('form-fields-choices', args=[self.field_id])
 		response = self.client.get(url)
+		self.assertEqual(_.pluck(response.data, 'sequence'), [1, 2, 3, 4, 5])
+		self.assertEqual(_.pluck(response.data, 'name'), ['choice-1', 'choice-2', 'choice-3', 'choice-4', 'choice-5'])
 		#print(json.dumps(response.data, indent=4))
 
 	def test_move_choice_up(self):
@@ -155,6 +157,8 @@ class ReSequenceChoicesTests(APITestCase):
 		# get all the choices for visual review
 		url = reverse('form-fields-choices', args=[self.field_id])
 		response = self.client.get(url)
+		self.assertEqual(_.pluck(response.data, 'sequence'), [1, 2, 3, 4, 5])
+		self.assertEqual(_.pluck(response.data, 'name'), ['choice-1', 'choice-2', 'choice-3', 'choice-4', 'choice-5'])
 		#print(json.dumps(response.data, indent=4))
 
 	def test_delete_choice(self):

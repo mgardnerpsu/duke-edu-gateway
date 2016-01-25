@@ -24,6 +24,13 @@ class FormTests(APITestCase):
 		#print(json.dumps(response.data, indent=4))
 		self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
+	def test_create_form_with_bad_data(self):
+		url = reverse('form-list')
+		data = {}
+		response = self.client.post(url, data)
+		print(json.dumps(response.data, indent=4))
+		self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
 	def test_list_forms(self):
 		url = reverse('form-list')
 		response = self.client.get(url)

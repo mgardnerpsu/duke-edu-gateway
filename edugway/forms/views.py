@@ -6,17 +6,6 @@ from rest_framework.response import Response
 from edugway.forms.models import Form, Field, Choice
 from edugway.forms.serializers import FormSerializer, FormUpdateSerializer, FieldSerializer, \
 										ChoiceSerializer
-def get_default_field_name(sequence):
-	'''
-	Generate field name using default prefix
-	'''
-	return 'field-' + str(sequence)
-
-def get_default_choice_name(sequence):
-	'''
-	Generate choice name using default prefix
-	'''
-	return 'choice-' + str(sequence)
 
 class FormViewSet(viewsets.ModelViewSet):
 	'''
@@ -40,7 +29,7 @@ class FormViewSet(viewsets.ModelViewSet):
 			max_sequence = form.fields.all().aggregate(Max('sequence'))['sequence__max']
 			sequence = (1 if (max_sequence is None) else (max_sequence + 1))
 			serializer.validated_data['sequence'] = sequence
-			serializer.validated_data['name'] = get_default_field_name(sequence)
+			serializer.validated_data['name'] = Field.format_name(sequence)
 			serializer.save()
 			return Response(serializer.data, status=status.HTTP_201_CREATED)
 		if request.method == 'GET':
@@ -61,7 +50,7 @@ class FieldViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, mixins.Upda
 		form = instance.form
 		for field in (form.fields.filter(sequence__gt=instance.sequence)):
 			field.sequence = field.sequence - 1
-			field.name = get_default_field_name(field.sequence)
+			field.name = Field.format_name(field.sequence)
 			field.save()
 		instance.delete()
 
@@ -77,9 +66,9 @@ class FieldViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, mixins.Upda
 			# swap field positions
 			field_up = form.fields.get(sequence=field_down.sequence + 1)
 			field_up.sequence = field_up.sequence - 1
-			field_up.name = get_default_field_name(field_up.sequence)
+			field_up.name = Field.format_name(field_up.sequence)
 			field_down.sequence = field_down.sequence + 1 
-			field_down.name = get_default_field_name(field_down.sequence)
+			field_down.name = Field.format_name(field_down.sequence)
 			field_down.save()
 			field_up.save()
 		serializer = FieldSerializer(field_down, many=False, context={'request': request})
@@ -97,9 +86,9 @@ class FieldViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, mixins.Upda
 			# swap field positions
 			field_down = form.fields.get(sequence=field_up.sequence - 1)
 			field_down.sequence = field_down.sequence + 1
-			field_down.name = get_default_field_name(field_down.sequence)
+			field_down.name = Field.format_name(field_down.sequence)
 			field_up.sequence = field_up.sequence - 1 
-			field_up.name = get_default_field_name(field_up.sequence)
+			field_up.name = Field.format_name(field_up.sequence)
 			field_up.save()
 			field_down.save()
 		serializer = FieldSerializer(field_up, many=False, context={'request': request})
@@ -115,7 +104,7 @@ class FieldViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, mixins.Upda
 			max_sequence = field.choices.all().aggregate(Max('sequence'))['sequence__max']
 			sequence = (1 if (max_sequence is None) else (max_sequence + 1))
 			serializer.validated_data['sequence'] = sequence
-			serializer.validated_data['name'] = get_default_choice_name(sequence)
+			serializer.validated_data['name'] = Choice.format_name(sequence)
 			serializer.save()
 			return Response(serializer.data, status=status.HTTP_201_CREATED)
 		if request.method == 'GET':
@@ -136,7 +125,7 @@ class ChoiceViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, mixins.Upd
 		field = instance.field
 		for choice in (field.choices.filter(sequence__gt=instance.sequence)):
 			choice.sequence = choice.sequence - 1
-			choice.name = get_default_choice_name(choice.sequence)
+			choice.name = Choice.format_name(choice.sequence)
 			choice.save()
 		instance.delete()
 
@@ -152,9 +141,9 @@ class ChoiceViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, mixins.Upd
 			# swap choice positions
 			choice_up = field.choices.get(sequence=choice_down.sequence + 1)
 			choice_up.sequence = choice_up.sequence - 1
-			choice_up.name = get_default_choice_name(choice_up.sequence)
+			choice_up.name = Choice.format_name(choice_up.sequence)
 			choice_down.sequence = choice_down.sequence + 1 
-			choice_down.name = get_default_choice_name(choice_down.sequence)
+			choice_down.name = Choice.format_name(choice_down.sequence)
 			choice_down.save()
 			choice_up.save()
 		serializer = ChoiceSerializer(choice_down, many=False, context={'request': request})
@@ -172,9 +161,9 @@ class ChoiceViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, mixins.Upd
 			# swap choice positions
 			choice_down = field.choices.get(sequence=choice_up.sequence - 1)
 			choice_down.sequence = choice_down.sequence + 1
-			choice_down.name = get_default_choice_name(choice_down.sequence)
+			choice_down.name = Choice.format_name(choice_down.sequence)
 			choice_up.sequence = choice_up.sequence - 1 
-			choice_up.name = get_default_choice_name(choice_up.sequence)
+			choice_up.name = Choice.format_name(choice_up.sequence)
 			choice_up.save()
 			choice_down.save()
 		serializer = ChoiceSerializer(choice_up, many=False, context={'request': request})

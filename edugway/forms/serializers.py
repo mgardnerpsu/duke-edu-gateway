@@ -34,3 +34,4 @@ class ChoiceSerializer(serializers.ModelSerializer):
 
 	def get_field(self, obj):
 		return collections.OrderedDict([('id', str(obj.field.id)), ])
+		

@@ -119,6 +119,9 @@ class ReSequenceFieldsTests(APITestCase):
 		# get all the fields for visual review
 		url = reverse('form-fields', args=[self.form_id])
 		response = self.client.get(url)
+		response = self.client.get(url)
+		self.assertEqual(_.pluck(response.data, 'sequence'), [1, 2, 3, 4, 5])
+		self.assertEqual(_.pluck(response.data, 'name'), ['field-1', 'field-2', 'field-3', 'field-4', 'field-5'])
 		#print(json.dumps(response.data, indent=4))
 
 	def test_move_field_up(self):
@@ -147,6 +150,8 @@ class ReSequenceFieldsTests(APITestCase):
 		# get all the fields for visual review
 		url = reverse('form-fields', args=[self.form_id])
 		response = self.client.get(url)
+		self.assertEqual(_.pluck(response.data, 'sequence'), [1, 2, 3, 4, 5])
+		self.assertEqual(_.pluck(response.data, 'name'), ['field-1', 'field-2', 'field-3', 'field-4', 'field-5'])
 		#print(json.dumps(response.data, indent=4))
 
 	def test_delete_field(self):

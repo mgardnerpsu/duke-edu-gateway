@@ -53,6 +53,14 @@ class Field(models.Model):
     name = models.CharField(u'Field Name', max_length=50)
     label = models.TextField(u'Label (Question)')
 
+    @classmethod
+    def format_name(cls, sequence):
+    # Generate name using default prefix   
+        return 'field-' + str(sequence)
+
+    def __str__(self):
+        return self.label
+
 class Choice(models.Model):
     '''
     A choice (answer) for a field (question).
@@ -67,4 +75,12 @@ class Choice(models.Model):
     sequence = models.IntegerField(u'Display Sequence')
     name = models.CharField(u'Choice Name', max_length=50)
     label = models.TextField(u'Label (Answer)')
-    is_correct = models.BooleanField('Is Correct Choice?', default=False)
+    is_correct = models.BooleanField('Correct Choice?', default=False)
+
+    @classmethod
+    def format_name(cls, sequence):
+    # Generate name using default prefix   
+        return 'choice-' + str(sequence)
+
+    def __str__(self):
+        return self.label
