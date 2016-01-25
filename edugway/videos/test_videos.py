@@ -20,16 +20,16 @@ class VideoTests(APITestCase):
 
 	def test_create_video(self):
 		url = reverse('video-list')
-		video_data = {'provider': Video.PROVIDER_YOUTUBE,  'provider_id': 'XUaqnxHn-QY'}
-		response = self.client.post(url, video_data)
+		data = {'provider': Video.PROVIDER_YOUTUBE,  'provider_id': 'XUaqnxHn-QY'}
+		response = self.client.post(url, data)
 		#print(json.dumps(response.data, indent=4))
 		self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
 	def test_create_duplicate_video(self):
 		url = reverse('video-list')
-		video_data = {'provider': Video.PROVIDER_YOUTUBE,  'provider_id': 'r10kqd1HDCI'}
-		response = self.client.post(url, video_data)
-		print(json.dumps(response.data, indent=4))
+		data = {'provider': Video.PROVIDER_YOUTUBE,  'provider_id': 'r10kqd1HDCI'}
+		response = self.client.post(url, data)
+		#print(json.dumps(response.data, indent=4))
 		self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
 	def test_list_videos(self):
@@ -47,11 +47,11 @@ class VideoTests(APITestCase):
 		url = reverse('video-youtube')
 		# verify 'q' search parameter is required
 		response = self.client.get(url)
-		print(json.dumps(response.data, indent=4))
+		#print(json.dumps(response.data, indent=4))
 		self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 		# verify invalid search params not accepted
 		response = self.client.get(url, {'bad_param': 'bad_value'})
-		print(json.dumps(response.data, indent=4))
+		#print(json.dumps(response.data, indent=4))
 		self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 		# verify valid query works
 		response = self.client.get(url, {'q':'Duke Education Gateway', 'maxResults': 5})

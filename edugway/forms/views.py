@@ -9,7 +9,7 @@ from edugway.forms.serializers import FormSerializer, FormUpdateSerializer, Fiel
 
 class FormViewSet(viewsets.ModelViewSet):
 	'''
-	Forms (assessments, evaluations) resourse actions
+	Forms (assessments, evaluations) resourse actions.
 	'''
 	queryset = Form.objects.all()
 	serializer_class = FormSerializer
@@ -41,7 +41,7 @@ class FormViewSet(viewsets.ModelViewSet):
 class FieldViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, 
 			mixins.DestroyModelMixin, viewsets.GenericViewSet):
 	'''
-	Form fields (questions) resourse actions
+	Form fields (questions) resourse actions.
 	'''
 	queryset = Field.objects.all()
 	serializer_class = FieldSerializer
@@ -116,7 +116,7 @@ class FieldViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, mixins.Upda
 class ChoiceViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, 
 			mixins.DestroyModelMixin, viewsets.GenericViewSet):
 	'''
-	Field choices (answers) resourse actions
+	Field choices (answers) resourse actions.
 	'''
 	queryset = Choice.objects.all()
 	serializer_class = ChoiceSerializer

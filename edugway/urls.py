@@ -19,12 +19,14 @@ from django.conf.urls import url, include
 from rest_framework import routers
 from edugway.forms import views as forms_views
 from edugway.videos import views as videos_views
+from edugway.authors import views as authors_views
 
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'forms', forms_views.FormViewSet)
 router.register(r'fields', forms_views.FieldViewSet, base_name='form-fields')
 router.register(r'choices', forms_views.ChoiceViewSet, base_name='field-choices')
 router.register(r'videos', videos_views.VideoViewSet)
+router.register(r'authors', authors_views.AuthorViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.

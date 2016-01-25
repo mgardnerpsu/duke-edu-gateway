@@ -12,7 +12,7 @@ from edugway.videos.serializers import VideoSerializer
 class VideoViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, mixins.RetrieveModelMixin, 
             viewsets.GenericViewSet):
     '''
-    Video resourse actions
+    Video resourse actions.
     '''
     queryset = Video.objects.all()
     serializer_class = VideoSerializer
@@ -54,12 +54,12 @@ class VideoViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, mixins.Retrie
         next_url = None
         if next_page_token is not None:
             options['pageToken'] = next_page_token
-            next_url = base_url + '?' + parse.urlencode(options)
+            next_url = request.build_absolute_uri(base_url + '?' + parse.urlencode(options))
 
         prev_url = None
         if prev_page_token is not None:
             options['pageToken'] = prev_page_token
-            prev_url = base_url + '?' + parse.urlencode(options)
+            prev_url = request.build_absolute_uri(base_url + '?' + parse.urlencode(options))
 
         results = videos['items']
 

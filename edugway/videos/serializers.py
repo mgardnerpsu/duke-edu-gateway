@@ -13,8 +13,8 @@ class VideoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Video
-        fields = ('id', 'provider', 'provider_id', 'title', 'descr', 
-            'watch_url', 'duration', 'thumbnails', ) #'provider_resource')
+        fields = ('id', 'provider', 'provider_id', 'title', 'descr', #'provider_resource'
+            'watch_url', 'duration', 'thumbnails', ) 
 
     def __init__(self, *args, **kwargs):
         super(VideoSerializer, self).__init__(*args, **kwargs)

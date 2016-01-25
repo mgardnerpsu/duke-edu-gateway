@@ -21,7 +21,7 @@ class Form(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     type = models.CharField(u'Type', max_length=50, choices=TYPE_CHOICES)
     title = models.CharField(u'Title', max_length=100)
-    descr = models.TextField(u'Description', null=True, blank=True)
+    descr = models.TextField(u'Description', blank=True)
 
     def __str__(self):
         return self.title

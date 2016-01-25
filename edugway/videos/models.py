@@ -3,7 +3,7 @@ from django.db import models
 from edugway import settings
 # include google API python modules
 from apiclient.discovery import build
-from apiclient.errors import HttpError as gApiHttpError
+from apiclient.errors import HttpError as gooleApiHttpError
 
 class Video(models.Model):
     '''
@@ -30,6 +30,10 @@ class Video(models.Model):
         return self.provider
 
 class YouTube:
+    '''
+    A TouTube video resource that may be associated to a course; this is 
+    an application level wrapper for the Google YouTube API.
+    '''
     BASE_WATCH_URL = 'https://www.youtube.com/embed'
 
     # create the youtube class level service handle

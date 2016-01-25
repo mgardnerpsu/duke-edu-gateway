@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'edugway.forms',
     'edugway.videos',
+    'edugway.authors',
 ]
 
 MIDDLEWARE_CLASSES = [
