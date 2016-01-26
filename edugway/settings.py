@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'edugway.forms',
     'edugway.videos',
     'edugway.authors',
+    'edugway.content',
 ]
 
 MIDDLEWARE_CLASSES = [

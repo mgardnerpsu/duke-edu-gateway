@@ -1,0 +1,18 @@
+[
+    {
+        "pk": "339187f0-132c-4e2e-8434-88382c7c2219", 
+        "model": "content.credit", 
+        "fields": {
+            "label": "AMA PRA Category 1", 
+            "descr": "American Medical Association (AMA) Physician's Recognition Award (PRA)"
+        }
+    },
+    {
+        "pk": "20fd7410-d033-4fb8-abb0-9ca17c48b265", 
+        "model": "content.credit", 
+        "fields": {
+            "label": "AAFP", 
+            "descr": "American Academy of Family Physicians"
+        }
+    }
+]

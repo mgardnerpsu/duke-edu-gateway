@@ -32,15 +32,15 @@ class VideoViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, mixins.Retrie
         options['maxResults'] = self.request.query_params.get('maxResults', None)
         options['pageToken'] = self.request.query_params.get('pageToken', None)
 
-        if options.get('q', None) is None:
+        if options.get('q') is None:
             raise serializers.ValidationError(
                 {settings.REST_FRAMEWORK['NON_FIELD_ERRORS_KEY']: 
                     ['Query term parameter (q) is required.']})
 
-        if options.get('maxResults', None) is None:
+        if options.get('maxResults') is None:
             options['maxResults'] = settings.YOUTUBE_MAX_RESULTS
 
-        if options.get('pageToken', None) is None:
+        if options.get('pageToken') is None:
             del options['pageToken']
 
         videos = YouTube.search_videos(options)
@@ -50,6 +50,8 @@ class VideoViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, mixins.Retrie
         base_url = reverse('video-youtube')
 
         count = videos['pageInfo']['totalResults']
+
+        results_per_page = videos['pageInfo']['resultsPerPage']
 
         next_url = None
         if next_page_token is not None:
@@ -64,6 +66,7 @@ class VideoViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, mixins.Retrie
         results = videos['items']
 
         videos = collections.OrderedDict([
-            ('count', count), ('next', next_url), ('previous', prev_url), ('results', results)])
+            ('count', count), ('next', next_url), ('previous', prev_url), 
+            ('results_per_page', results_per_page), ('results', results)])
 
         return Response(videos, status.HTTP_200_OK)

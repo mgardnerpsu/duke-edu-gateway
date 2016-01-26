@@ -19,6 +19,8 @@ class AuthorTests(APITestCase):
             'headline': 'Assistant Professor of Medicine\nMember in the Duke Clinical Research Institute',
             'headline_thumbnail_url': 
             'https://medicine.duke.edu/sites/medicine.duke.edu/files/styles/profile/public/i1638962?itok=Ti3sFdam',
+            'disclosure_statement': 'The author has no industry disclosures to report.',
+            'disclosure_expire_on': timezone.now()             
             }
         response = self.client.post(url, self.author_data)
         self.author_id = response.data['id']
@@ -29,7 +31,9 @@ class AuthorTests(APITestCase):
             'title': 'Zubin John Eapen, MD',
             'headline': 'Assistant Professor of Medicine\nMember in the Duke Clinical Research Institute',
             'headline_thumbnail_url': 
-            'https://medicine.duke.edu/sites/medicine.duke.edu/files/styles/profile/public/i1638962?itok=Ti3sFdam'
+            'https://medicine.duke.edu/sites/medicine.duke.edu/files/styles/profile/public/i1638962?itok=Ti3sFdam',
+            'disclosure_statement': 'The author has no industry disclosures to report.',
+            'disclosure_expire_on': timezone.now() 
             }
         response = self.client.post(url, data)
         #print(json.dumps(response.data, indent=4))
@@ -41,72 +45,13 @@ class AuthorTests(APITestCase):
             'title': 'Zubin John Eapen, MD',
             'headline': 'Assistant Professor of Medicine\nMember in the Duke Clinical Research Institute',
             'headline_thumbnail_url': 
-            'invalid-prefix://medicine.duke.edu/sites/medicine.duke.edu/files/styles/profile/public/i1638962?itok=Ti3sFdam'
+            'invalid-prefix://medicine.duke.edu/sites/medicine.duke.edu/files/styles/profile/public/i1638962?itok=Ti3sFdam',
+            'disclosure_statement': 'The author has no industry disclosures to report.',
+            'disclosure_expire_on': timezone.now() 
             }
         response = self.client.post(url, data)
         #print(json.dumps(response.data, indent=4))
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-
-    def test_create_author_disclosure(self):
-        url = reverse('author-list')
-        data = {
-            'title': 'Zubin John Eapen, MD',
-            'headline': 'Assistant Professor of Medicine\nMember in the Duke Clinical Research Institute',
-            'headline_thumbnail_url': 
-            'https://medicine.duke.edu/sites/medicine.duke.edu/files/styles/profile/public/i1638962?itok=Ti3sFdam',
-            'disclosure_statement': 'I am associated with Big Pill, Inc.',
-            'disclosure_expire_on': timezone.now() 
-            }
-        response = self.client.post(url, data)
-        #print(json.dumps(response.data, indent=4))
-        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-
-    def test_create_invalid_author_disclosure(self):
-        url = reverse('author-list')
-        data = {
-            'title': 'Zubin John Eapen, MD',
-            'headline': 'Assistant Professor of Medicine\nMember in the Duke Clinical Research Institute',
-            'headline_thumbnail_url': 
-            'https://medicine.duke.edu/sites/medicine.duke.edu/files/styles/profile/public/i1638962?itok=Ti3sFdam',
-            'disclosure_statement': 'I am associated with Big Pill, Inc.'
-            }
-        response = self.client.post(url, data)
-        #print(json.dumps(response.data, indent=4))
-        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-
-    def test_remove_author_disclosure(self):
-        url = reverse('author-detail', args=[self.author_id])
-        data = {
-            'disclosure_statement': 'I am associated with Big Pill, Inc.',
-            'disclosure_expire_on': timezone.now() 
-            }
-        response = self.client.patch(url, data)
-        print(json.dumps(response.data, indent=4))
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        data = {
-            'disclosure_statement': ' '
-            }
-        response = self.client.patch(url, data)
-        print(json.dumps(response.data, indent=4))
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data['disclosure_expire_on'], None)
-        # make sure expiration date cannot be set when no disclosure exists
-        data = {
-            'disclosure_expire_on': timezone.now() 
-            }
-        response = self.client.patch(url, data)
-        print(json.dumps(response.data, indent=4))
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data['disclosure_expire_on'], None)
-        # make sure expiration date cannot be set when no disclosure exists
-        data = {
-            'disclosure_statement': ' ',
-            'disclosure_expire_on': timezone.now() 
-            }
-        response = self.client.patch(url, data)
-        print(json.dumps(response.data, indent=4))
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data['disclosure_expire_on'], None)
         
     def test_list_authors(self):
         url = reverse('author-list')
@@ -125,11 +70,24 @@ class AuthorTests(APITestCase):
             'title': 'Zubin John Eapen, MD - updated',
             'headline': 'Assistant Professor of Medicine\nMember in the Duke Clinical Research Institute',
             'headline_thumbnail_url': 
-            'https://medicine.duke.edu/sites/medicine.duke.edu/files/styles/profile/public/i1638962?itok=Ti3sFdam'
+            'https://medicine.duke.edu/sites/medicine.duke.edu/files/styles/profile/public/i1638962?itok=Ti3sFdam',
+            'disclosure_statement': 'The author has no industry disclosures to report.',
+            'disclosure_expire_on': timezone.now() 
             }
         response = self.client.put(url, data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data['title'], 'Zubin John Eapen, MD - updated')
+
+    def test_patch_author(self):
+        url = reverse('author-detail', args=[self.author_id])
+        data =  {
+            'title': 'Zubin John Eapen, MD - patched',
+            'disclosure_statement': 'The author has no industry disclosures to report.',
+            'disclosure_expire_on': timezone.now() 
+            }
+        response = self.client.patch(url, data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data['title'], 'Zubin John Eapen, MD - patched')
 
     def test_delete_author(self):
         url = reverse('author-detail', args=[self.author_id])
