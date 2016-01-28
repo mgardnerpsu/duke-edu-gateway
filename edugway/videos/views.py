@@ -2,10 +2,10 @@ import collections
 from django.shortcuts import render
 from django.core.urlresolvers import reverse
 from urllib import parse
-from edugway import settings
 from rest_framework import mixins, viewsets, serializers, status 
 from rest_framework.decorators import detail_route, list_route
 from rest_framework.response import Response
+from edugway import settings
 from edugway.videos.models import Video, YouTube
 from edugway.videos.serializers import VideoSerializer
 

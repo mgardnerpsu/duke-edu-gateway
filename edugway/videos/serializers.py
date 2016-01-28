@@ -1,7 +1,7 @@
 import collections
 import isodate
 from edugway.videos.models import Video, YouTube
-from rest_framework import serializers
+from rest_framework import serializers, validators
 
 class VideoSerializer(serializers.ModelSerializer):
     title = serializers.SerializerMethodField()
@@ -15,6 +15,14 @@ class VideoSerializer(serializers.ModelSerializer):
         model = Video
         fields = ('id', 'provider', 'provider_id', 'title', 'descr', #'provider_resource'
             'watch_url', 'duration', 'thumbnails', ) 
+
+    validators = [
+            validators.UniqueTogetherValidator(
+                queryset=Video.objects.all(),
+                fields=('provider', 'provider_id', ),
+                message='The provider (YouTube, Vimeo, etc.) video already exists.'
+            )
+        ]
 
     def __init__(self, *args, **kwargs):
         super(VideoSerializer, self).__init__(*args, **kwargs)

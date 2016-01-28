@@ -30,6 +30,7 @@ router.register(r'videos', videos_views.VideoViewSet)
 router.register(r'authors', authors_views.AuthorViewSet)
 router.register(r'categories', content_views.CategoryViewSet)
 router.register(r'credits', content_views.CreditViewSet)
+router.register(r'courses', content_views.CourseViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.

@@ -11,7 +11,7 @@ class Author(models.Model):
         verbose_name = u'Author'
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    title = models.CharField(u'Title', max_length=240)
+    title = models.CharField(u'Title', max_length=120)
     headline = models.TextField(u'Headline')
     headline_thumbnail_url = models.CharField(u'Headline Portrait URL', max_length=240,
     	validators=[dj_validators.URLValidator()])

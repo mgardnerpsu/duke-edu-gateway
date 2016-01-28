@@ -19,8 +19,8 @@ class Form(models.Model):
     )
     
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    type = models.CharField(u'Type', max_length=50, choices=TYPE_CHOICES)
-    title = models.CharField(u'Title', max_length=100)
+    type = models.CharField(u'Type', max_length=60, choices=TYPE_CHOICES)
+    title = models.CharField(u'Title', max_length=120)
     descr = models.TextField(u'Description', blank=True)
 
     def __str__(self):
@@ -49,8 +49,8 @@ class Field(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     form = models.ForeignKey(Form, related_name=u'fields')
     sequence = models.IntegerField(u'Display Sequence')
-    type = models.CharField(u'Type', max_length=50, choices=TYPE_CHOICES)
-    name = models.CharField(u'Field Name', max_length=50)
+    type = models.CharField(u'Type', max_length=60, choices=TYPE_CHOICES)
+    name = models.CharField(u'Field Name', max_length=60)
     label = models.TextField(u'Label (Question)')
 
     @classmethod
@@ -73,7 +73,7 @@ class Choice(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)   
     field = models.ForeignKey(Field, related_name='choices')
     sequence = models.IntegerField(u'Display Sequence')
-    name = models.CharField(u'Choice Name', max_length=50)
+    name = models.CharField(u'Choice Name', max_length=60)
     label = models.TextField(u'Label (Answer)')
     is_correct = models.BooleanField('Correct Choice?', default=False)
 
