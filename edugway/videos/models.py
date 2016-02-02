@@ -1,13 +1,13 @@
 import uuid
 from django.db import models
-from edugway import settings
-# include google API python modules
+# include google API apiclient resources
 from apiclient.discovery import build
 from apiclient.errors import HttpError as gooleApiHttpError
+from edugway import settings
 
 class Video(models.Model):
     '''
-    A video resource that may be associated to a course.
+    A video that may be associated to a course.
     '''
     class Meta:
         db_table = 'video'
@@ -31,11 +31,9 @@ class Video(models.Model):
 
 class YouTube:
     '''
-    A TouTube video resource that may be associated to a course; this is 
-    an application level wrapper for the Google YouTube API.
+    A TouTube video that may be associated to a course; this is an application
+    level wrapper for the Google YouTube API video resource content.
     '''
-    BASE_WATCH_URL = 'https://www.youtube.com/embed'
-
     # create the youtube class level service handle
     youtube = build(settings.YOUTUBE_API_SERVICE_NAME, settings.YOUTUBE_API_VERSION,           
         developerKey=settings.YOUTUBE_API_KEY)
@@ -54,8 +52,6 @@ class YouTube:
     @classmethod
     def get_video(cls, id):
         yt = cls.get_service()
-        return yt.videos().list(
-            id=id, 
-            maxResults=1, 
+        return yt.videos().list(id=id, maxResults=1, 
             part='id, snippet, contentDetails, player').execute()['items'][0]
 

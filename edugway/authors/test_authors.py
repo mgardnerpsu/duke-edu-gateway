@@ -16,7 +16,7 @@ class AuthorTests(APITestCase):
         self.author_data = {
             'title': 'Zubin John Eapen, MD',
             'headline': 'Assistant Professor of Medicine\nMember in the Duke Clinical Research Institute',
-            'headline_thumbnail_url': 
+            'thumbnails_headline_url': 
             'https://medicine.duke.edu/sites/medicine.duke.edu/files/styles/profile/public/i1638962?itok=Ti3sFdam',
             'disclosure_statement': 'The author has no industry disclosures to report.',
             'disclosure_expire_on': timezone.now()             
@@ -29,7 +29,7 @@ class AuthorTests(APITestCase):
         data = {
             'title': 'Zubin John Eapen, MD',
             'headline': 'Assistant Professor of Medicine\nMember in the Duke Clinical Research Institute',
-            'headline_thumbnail_url': 
+            'thumbnails_headline_url': 
             'https://medicine.duke.edu/sites/medicine.duke.edu/files/styles/profile/public/i1638962?itok=Ti3sFdam',
             'disclosure_statement': 'The author has no industry disclosures to report.',
             'disclosure_expire_on': timezone.now() 
@@ -43,7 +43,7 @@ class AuthorTests(APITestCase):
         data = {
             'title': 'Zubin John Eapen, MD',
             'headline': 'Assistant Professor of Medicine\nMember in the Duke Clinical Research Institute',
-            'headline_thumbnail_url': 
+            'thumbnails_headline_url': 
             'invalid-prefix://medicine.duke.edu/sites/medicine.duke.edu/files/styles/profile/public/i1638962?itok=Ti3sFdam',
             'disclosure_statement': 'The author has no industry disclosures to report.',
             'disclosure_expire_on': timezone.now() 
@@ -68,7 +68,7 @@ class AuthorTests(APITestCase):
         data =  {
             'title': 'Zubin John Eapen, MD - updated',
             'headline': 'Assistant Professor of Medicine\nMember in the Duke Clinical Research Institute',
-            'headline_thumbnail_url': 
+            'thumbnails_headline_url': 
             'https://medicine.duke.edu/sites/medicine.duke.edu/files/styles/profile/public/i1638962?itok=Ti3sFdam',
             'disclosure_statement': 'The author has no industry disclosures to report.',
             'disclosure_expire_on': timezone.now() 

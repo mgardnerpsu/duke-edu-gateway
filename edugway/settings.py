@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'edugway.videos',
     'edugway.authors',
     'edugway.content',
+    'edugway.utils',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -125,10 +126,10 @@ STATIC_URL = '/static/'
 # Django REST framework settings
 ############################################################
 REST_FRAMEWORK = {
-    #'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
     'PAGE_SIZE': 25,
     'TEST_REQUEST_DEFAULT_FORMAT': 'json',
-    'NON_FIELD_ERRORS_KEY': 'non_field_errors'
+    'NON_FIELD_ERRORS_KEY': 'non_field_errors',
+    'EXCEPTION_HANDLER': 'edugway.utils.views.custom_exception_handler'
 }
 
 ############################################################
@@ -161,10 +162,11 @@ STATICFILES_DIRS = (
 ############################################################
 # YouTube API settings
 ############################################################
-YOUTUBE_API_SERVICE_NAME = "youtube"
-YOUTUBE_API_VERSION = "v3"
+YOUTUBE_API_SERVICE_NAME = 'youtube'
+YOUTUBE_API_VERSION = 'v3'
 YOUTUBE_API_KEY = os.environ.get('YOUTUBE_API_KEY')
 YOUTUBE_MAX_RESULTS = 25
+YOUTUBE_BASE_WATCH_URL = 'https://www.youtube.com/embed'
 #############################################################
 # End YouTube API settings
 #############################################################

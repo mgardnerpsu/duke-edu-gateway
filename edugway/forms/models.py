@@ -21,7 +21,7 @@ class Form(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     type = models.CharField(u'Type', max_length=60, choices=TYPE_CHOICES)
     title = models.CharField(u'Title', max_length=120)
-    descr = models.TextField(u'Description', blank=True)
+    descr = models.TextField(u'Description', null=True)
 
     def __str__(self):
         return self.title
@@ -51,11 +51,11 @@ class Field(models.Model):
     sequence = models.IntegerField(u'Display Sequence')
     type = models.CharField(u'Type', max_length=60, choices=TYPE_CHOICES)
     name = models.CharField(u'Field Name', max_length=60)
-    label = models.TextField(u'Label (Question)')
+    label = models.TextField(u'Display Label (Question)')
 
     @classmethod
     def format_name(cls, sequence):
-    # Generate name using default prefix   
+    # format "name" using default prefix   
         return 'field-' + str(sequence)
 
     def __str__(self):
@@ -63,7 +63,7 @@ class Field(models.Model):
 
 class Choice(models.Model):
     '''
-    A choice (answer) for a field (question).
+    A valid choice (answer) for a field (question).
     '''
     class Meta:
         db_table = 'choice'
@@ -74,12 +74,13 @@ class Choice(models.Model):
     field = models.ForeignKey(Field, related_name='choices')
     sequence = models.IntegerField(u'Display Sequence')
     name = models.CharField(u'Choice Name', max_length=60)
-    label = models.TextField(u'Label (Answer)')
+    label = models.TextField(u'Display Label (Answer)')
+    # only relevant for forms of type "assessment"
     is_correct = models.BooleanField('Correct Choice?', default=False)
 
     @classmethod
     def format_name(cls, sequence):
-    # Generate name using default prefix   
+    # format "name" using default prefix   
         return 'choice-' + str(sequence)
 
     def __str__(self):

@@ -1,7 +1,7 @@
 import collections
+from urllib import parse
 from django.shortcuts import render
 from django.core.urlresolvers import reverse
-from urllib import parse
 from rest_framework import mixins, viewsets, serializers, status 
 from rest_framework.decorators import detail_route, list_route
 from rest_framework.response import Response
@@ -9,8 +9,8 @@ from edugway import settings
 from edugway.videos.models import Video, YouTube
 from edugway.videos.serializers import VideoSerializer
 
-class VideoViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, mixins.RetrieveModelMixin, 
-            viewsets.GenericViewSet):
+class VideoViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, 
+    mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     '''
     Video resourse actions.
     '''
@@ -24,8 +24,7 @@ class VideoViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, mixins.Retrie
         for key in self.request.query_params:
             if key not in valid_options:
                 raise serializers.ValidationError(
-                    {settings.REST_FRAMEWORK['NON_FIELD_ERRORS_KEY']: 
-                        ['Invalid query parameter (' + key + ') specified.']})
+                    'Invalid query parameter (' + key + ') specified.')
 
         options = {}
         options['q'] = self.request.query_params.get('q', None)
@@ -34,8 +33,7 @@ class VideoViewSet(mixins.CreateModelMixin, mixins.ListModelMixin, mixins.Retrie
 
         if options.get('q') is None:
             raise serializers.ValidationError(
-                {settings.REST_FRAMEWORK['NON_FIELD_ERRORS_KEY']: 
-                    ['Query term parameter (q) is required.']})
+                'Query term parameter (q) is required.')
 
         if options.get('maxResults') is None:
             options['maxResults'] = settings.YOUTUBE_MAX_RESULTS

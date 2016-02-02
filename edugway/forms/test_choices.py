@@ -127,9 +127,9 @@ class ReSequenceChoicesTests(APITestCase):
 		# get all the choices for visual review
 		url = reverse('form-fields-choices', args=[self.field_id])
 		response = self.client.get(url)
+		#print(json.dumps(response.data, indent=4))
 		self.assertEqual(_.pluck(response.data, 'sequence'), [1, 2, 3, 4, 5])
 		self.assertEqual(_.pluck(response.data, 'name'), ['choice-1', 'choice-2', 'choice-3', 'choice-4', 'choice-5'])
-		#print(json.dumps(response.data, indent=4))
 
 	def test_move_choice_up(self):
 		# move choice 1 up (first choice)
@@ -157,9 +157,9 @@ class ReSequenceChoicesTests(APITestCase):
 		# get all the choices for visual review
 		url = reverse('form-fields-choices', args=[self.field_id])
 		response = self.client.get(url)
+		#print(json.dumps(response.data, indent=4))
 		self.assertEqual(_.pluck(response.data, 'sequence'), [1, 2, 3, 4, 5])
 		self.assertEqual(_.pluck(response.data, 'name'), ['choice-1', 'choice-2', 'choice-3', 'choice-4', 'choice-5'])
-		#print(json.dumps(response.data, indent=4))
 
 	def test_delete_choice(self):
 		# delete choice 2
@@ -168,7 +168,21 @@ class ReSequenceChoicesTests(APITestCase):
 		# verify choices were re-sequenced
 		url = reverse('form-fields-choices', args=[self.field_id])
 		response = self.client.get(url)
+		#print(json.dumps(response.data, indent=4))
 		self.assertEqual(_.pluck(response.data, 'sequence'), [1, 2, 3, 4])
 		self.assertEqual(_.pluck(response.data, 'name'), ['choice-1', 'choice-2', 'choice-3', 'choice-4'])
+
+	def test_mark_correct_choice(self):
+		# mark choice 2, 3, 4 correct
+		url = reverse('field-choices-mark-correct', args=[self.choices[2]['id']])
+		response = self.client.put(url)
+		url = reverse('field-choices-mark-correct', args=[self.choices[3]['id']])
+		response = self.client.put(url)
+		url = reverse('field-choices-mark-correct', args=[self.choices[4]['id']])
+		response = self.client.put(url)
+		# verify only choice 4 is correct
+		url = reverse('form-fields-choices', args=[self.field_id])
+		response = self.client.get(url)
 		#print(json.dumps(response.data, indent=4))
+		self.assertEqual(_.pluck(response.data, 'is_correct'), [False, False, False, True, False])
 

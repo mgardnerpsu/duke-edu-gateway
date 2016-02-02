@@ -1,8 +1,11 @@
 import collections
-from edugway import settings
-from edugway.content.models import Category, Credit, Course, \
-        CourseAuthor
 from rest_framework import serializers, validators
+from edugway import settings
+from edugway.content.models import Category, Credit, Course
+from edugway.forms.models import Form
+from edugway.authors.serializers import AuthorSerializer
+from edugway.videos.serializers import VideoSerializer
+from edugway.forms.serializers import FormSerializer
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
@@ -15,32 +18,68 @@ class CreditSerializer(serializers.ModelSerializer):
         fields = ('id', 'label', 'descr', ) 
 
 class CourseSerializer(serializers.ModelSerializer):
+    author_id = serializers.UUIDField(write_only=True, required=False, allow_null=True)
+    category_id = serializers.UUIDField(write_only=True, required=False, allow_null=True)
+    credit_id = serializers.UUIDField(write_only=True, required=False, allow_null=True)
+    video_id = serializers.UUIDField(write_only=True, required=False, allow_null=True)
+    assessment_id = serializers.UUIDField(write_only=True, required=False, allow_null=True)
+    evaluation_id = serializers.UUIDField(write_only=True, required=False, allow_null=True)
+    author = AuthorSerializer(many=False, read_only=True)
+    category = CategorySerializer(many=False, read_only=True)
+    credit = CreditSerializer(many=False, read_only=True)
+    video = VideoSerializer(many=False, read_only=True)
+    assessment = FormSerializer(many=False, read_only=True)
+    evaluation = FormSerializer(many=False, read_only=True)
+
     class Meta:
         model = Course
-        fields = ('id', 'title', 'descr', 'learning_objective', )
+        fields = ('id', 'title', 'descr', 'learning_objective', 'author_id', 'author', 
+            'category_id', 'category', 'credit_id', 'credit', 'video_id', 'video',
+            'assessment_id', 'assessment', 'evaluation_id', 'evaluation', )
 
-class CourseAuthorSerializer(serializers.ModelSerializer):
-    course_id = serializers.CharField(write_only=True)
-    author_id = serializers.CharField(write_only=True)
-    course = serializers.SerializerMethodField()
-    author = serializers.SerializerMethodField()
+    def validate(self, data):
+        # verify form type relations are valid.
+        assessment_id = data.get('assessment_id', None)
+        evaluation_id = data.get('evaluation_id', None)
 
-    validators = [
-            validators.UniqueTogetherValidator(
-                queryset=CourseAuthor.objects.all(),
-                fields=('course_id', ),
-                message='An author has already been associated to this course.'
-            )
-        ]
+        if assessment_id is not None:
+            try:
+                Form.objects.get(pk=assessment_id, type=Form.TYPE_ASSESSMENT)
+            except Form.DoesNotExist:
+                raise serializers.ValidationError(
+                    'Invalid form type specified for a course assessment.')
 
-    class Meta:
-        model = CourseAuthor
-        fields = ('id', 'course_id', 'author_id', 'course', 'author', )
+        if evaluation_id is not None:
+            try:
+                Form.objects.get(pk=evaluation_id, type=Form.TYPE_EVALUATION)
+            except Form.DoesNotExist:
+                raise serializers.ValidationError(
+                    'Invalid form type specified for a course evaluation.')
 
-    def get_course(self, obj):
-        return collections.OrderedDict([('id', str(obj.course.id)), ])
+        return data
 
-    def get_author(self, obj):
-        return collections.OrderedDict([('id', str(obj.author.id)), ])
- 
+# DEPRECATED - only support a single author for alpha.
+# class CourseAuthorSerializer(serializers.ModelSerializer):
+#     course_id = serializers.CharField(write_only=True)
+#     author_id = serializers.CharField(write_only=True)
+#     course = serializers.SerializerMethodField()
+#     author = serializers.SerializerMethodField()
+
+#     validators = [
+#             validators.UniqueTogetherValidator(
+#                 queryset=CourseAuthor.objects.all(),
+#                 fields=('course_id', ),
+#                 message='An author has already been associated to this course.'
+#             )
+#         ]
+
+#     class Meta:
+#         model = CourseAuthor
+#         fields = ('id', 'course_id', 'author_id', 'course', 'author', )
+
+#     def get_course(self, obj):
+#         return collections.OrderedDict([('id', str(obj.course.id)), ])
+
+#     def get_author(self, obj):
+#         return collections.OrderedDict([('id', str(obj.author.id)), ])
  

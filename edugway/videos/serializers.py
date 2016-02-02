@@ -1,9 +1,11 @@
 import collections
 import isodate
-from edugway.videos.models import Video, YouTube
 from rest_framework import serializers, validators
+from edugway import settings
+from edugway.videos.models import Video, YouTube
+from edugway.utils.serializers import DynamicFieldsModelSerializer
 
-class VideoSerializer(serializers.ModelSerializer):
+class VideoSerializer(DynamicFieldsModelSerializer):
     title = serializers.SerializerMethodField()
     descr = serializers.SerializerMethodField()
     watch_url = serializers.SerializerMethodField()
@@ -42,7 +44,7 @@ class VideoSerializer(serializers.ModelSerializer):
         return self.get_provider_content(obj.provider_id)['snippet']['description']
 
     def get_watch_url(self, obj):
-        return YouTube.BASE_WATCH_URL + '/' + obj.provider_id
+        return settings.YOUTUBE_BASE_WATCH_URL + '/' + obj.provider_id
 
     def get_duration(self, obj):
         content = self.get_provider_content(obj.provider_id)
@@ -55,6 +57,8 @@ class VideoSerializer(serializers.ModelSerializer):
     def get_thumbnails(self, obj):
         return self.get_provider_content(obj.provider_id)['snippet']['thumbnails']
 
+    # This stub may be used to get raw YouTube video payload, but we will 
+    # evaluate the need for this as we build out the alpha release.
     # def get_provider_resource(self, obj):
     #     return YouTubeVideoSerializer(YouTube.get_video(obj.provider_id)['items'][0]).data
 
