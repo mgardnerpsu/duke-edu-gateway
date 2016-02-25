@@ -1,0 +1,362 @@
+[
+{
+    "pk": 1, 
+    "model": "gateway.author", 
+    "fields": {
+        "thnail_square_url": "http://www.dukemedicine.org/sites/www.dukemedicine.org/files/styles/doctor_thumbnail/public/photos/physician/aubrey-d.jolly-graham-md.jpg?itok=bcLa3q-R", 
+        "title": "Aubrey Jolly Graham, MD", 
+        "headline": "Assistant Professor of Medicine Hospital Medicine Specialist\nDuke University Medical Center", 
+        "thnail_feature_url": "http://www.dukemedicine.org/sites/www.dukemedicine.org/files/styles/doctor_thumbnail/public/photos/physician/aubrey-d.jolly-graham-md.jpg?itok=bcLa3q-R", 
+        "created_on": "2014-09-24T15:12:34Z", 
+        "updated_on": "2014-10-15T16:54:10Z"
+    }
+},
+{
+    "pk": 2, 
+    "model": "gateway.author", 
+    "fields": {
+        "thnail_square_url": null, 
+        "title": "Cynthia Smith, MD", 
+        "headline": "Adjunct Associate Professor of Medicine, University of Pennsylvania\nSenior Medical Associate for Content Development, Medical Education Division, American College of Physicians", 
+        "thnail_feature_url": null, 
+        "created_on": "2014-09-24T15:29:08Z", 
+        "updated_on": "2014-09-26T18:48:07Z"
+    }
+},
+{
+    "pk": 3, 
+    "model": "gateway.author", 
+    "fields": {
+        "thnail_square_url": "http://news.medicine.duke.edu/wp-content/uploads/2013/09/STEPHEN.BERGIN.1-205x300.jpg", 
+        "title": "Stephen Bergin, MD", 
+        "headline": "Chief Resident for Duke Regional Hospital and Ambulatory Medicine\nDuke University Medical Center", 
+        "thnail_feature_url": "http://news.medicine.duke.edu/wp-content/uploads/2013/09/STEPHEN.BERGIN.1-205x300.jpg", 
+        "created_on": "2014-09-26T18:39:58Z", 
+        "updated_on": "2014-10-15T16:53:52Z"
+    }
+},
+{
+    "pk": 4, 
+    "model": "gateway.author", 
+    "fields": {
+        "thnail_square_url": "http://cdn1.sph.harvard.edu/wp-content/uploads/sites/335/2012/08/Lee-head-shot-2013.jpg", 
+        "title": "I-Min Lee, MBBS, MPH, ScD", 
+        "headline": "Professor of Medicine, Harvard Medical School", 
+        "thnail_feature_url": "http://cdn1.sph.harvard.edu/wp-content/uploads/sites/335/2012/08/Lee-head-shot-2013.jpg", 
+        "created_on": "2014-09-26T18:53:25Z", 
+        "updated_on": "2014-10-15T16:57:17Z"
+    }
+},
+{
+    "pk": 5, 
+    "model": "gateway.author", 
+    "fields": {
+        "thnail_square_url": "http://www.dukemedicine.org/sites/www.dukemedicine.org/files/styles/doctor_profile/public/photos/physician/susanna-naggie-md-mhs_1.jpg?itok=WoRnPFl4", 
+        "title": "Susanna Naggie, MD, MHS", 
+        "headline": "Assistant Professor of Medicine Duke University Medical Center\nDirector, Infectious Diseases Research, Duke Clinical Research Institute", 
+        "thnail_feature_url": "http://www.dukemedicine.org/sites/www.dukemedicine.org/files/styles/doctor_profile/public/photos/physician/susanna-naggie-md-mhs_1.jpg?itok=WoRnPFl4", 
+        "created_on": "2014-09-26T19:02:45Z", 
+        "updated_on": "2014-10-15T16:54:23Z"
+    }
+},
+{
+    "pk": 6, 
+    "model": "gateway.author", 
+    "fields": {
+        "thnail_square_url": "http://www.dukemedicine.org/sites/www.dukemedicine.org/files/styles/doctor_thumbnail/public/photos/physician/mitchell-e.horwitz-md_5.jpg?itok=b21ZBi-0", 
+        "title": "Mitchell Horwitz, MD", 
+        "headline": "Cell Therapy and Hematologic Malignancies Specialist\nDuke University Medical Center", 
+        "thnail_feature_url": "http://www.dukemedicine.org/sites/www.dukemedicine.org/files/styles/doctor_thumbnail/public/photos/physician/mitchell-e.horwitz-md_5.jpg?itok=b21ZBi-0", 
+        "created_on": "2014-09-29T17:48:24Z", 
+        "updated_on": "2014-10-15T16:54:36Z"
+    }
+},
+{
+    "pk": 7, 
+    "model": "gateway.author", 
+    "fields": {
+        "thnail_square_url": "http://blogs.library.duke.edu/rubenstein/files/2011/11/neelon-blog.jpg", 
+        "title": "Francis Neelon, MD", 
+        "headline": "Medical Director, Rice House Healthcare Program", 
+        "thnail_feature_url": "http://blogs.library.duke.edu/rubenstein/files/2011/11/neelon-blog.jpg", 
+        "created_on": "2014-09-29T17:52:39Z", 
+        "updated_on": "2014-10-15T16:56:59Z"
+    }
+},
+{
+    "pk": 8, 
+    "model": "gateway.author", 
+    "fields": {
+        "thnail_square_url": "http://www.dukemedicine.org/sites/www.dukemedicine.org/files/styles/doctor_thumbnail/public/photos/physician/gowthami-m.arepally-md_0.jpg?itok=Ej7t8WKQ", 
+        "title": "Gowthami Arepally, MD", 
+        "headline": "Associate Professor of Medicine and Pathology\nDuke Hematology", 
+        "thnail_feature_url": "http://www.dukemedicine.org/sites/www.dukemedicine.org/files/styles/doctor_thumbnail/public/photos/physician/gowthami-m.arepally-md_0.jpg?itok=Ej7t8WKQ", 
+        "created_on": "2014-09-30T13:03:17Z", 
+        "updated_on": "2014-10-15T16:54:49Z"
+    }
+},
+{
+    "pk": 9, 
+    "model": "gateway.author", 
+    "fields": {
+        "thnail_square_url": "http://assets3.parliament.uk/ext/mnis-bio-person/www.dodspeople.com/photos/84719.jpg.jpg", 
+        "title": "Professor the Lord Kakkar, MBBS, BSc, PhD, FRCS (Ajay Kakkar)", 
+        "headline": "Chairman, University College London Partners Limited", 
+        "thnail_feature_url": "http://assets3.parliament.uk/ext/mnis-bio-person/www.dodspeople.com/photos/84719.jpg.jpg", 
+        "created_on": "2014-09-30T13:22:42Z", 
+        "updated_on": "2014-10-15T16:56:43Z"
+    }
+},
+{
+    "pk": 10, 
+    "model": "gateway.author", 
+    "fields": {
+        "thnail_square_url": "http://www.dukemedicine.org/sites/www.dukemedicine.org/files/styles/doctor_thumbnail/public/photos/physician/l.ebony-boulware-md-mph.jpg?itok=q_xCkOyN", 
+        "title": "L.Ebony Boulware, MD, MPH", 
+        "headline": "Chief, Division of General Internal Medicine\nDuke University School of Medicine", 
+        "thnail_feature_url": "http://www.dukemedicine.org/sites/www.dukemedicine.org/files/styles/doctor_thumbnail/public/photos/physician/l.ebony-boulware-md-mph.jpg?itok=q_xCkOyN", 
+        "created_on": "2014-10-14T17:12:02Z", 
+        "updated_on": "2014-10-15T16:56:31Z"
+    }
+},
+{
+    "pk": 11, 
+    "model": "gateway.author", 
+    "fields": {
+        "thnail_square_url": "http://dmpi.duke.edu/sites/dmpi.duke.edu/files/styles/faculty/public/faculty/kim_huffman.jpg?itok=vhClH2cr", 
+        "title": "Kim M. Huffman, MD, PhD", 
+        "headline": "Faculty Member, Duke Molecular Physiology Institute\nAssistant Professor Department of Medicine, \nDivision of Rheumatology Duke University Medical Center", 
+        "thnail_feature_url": "http://dmpi.duke.edu/sites/dmpi.duke.edu/files/styles/faculty/public/faculty/kim_huffman.jpg?itok=vhClH2cr", 
+        "created_on": "2014-10-14T17:26:44Z", 
+        "updated_on": "2014-11-11T15:58:36Z"
+    }
+},
+{
+    "pk": 12, 
+    "model": "gateway.author", 
+    "fields": {
+        "thnail_square_url": "http://www.kclifesciences.org/wp-content/uploads/2010/11/CraigBrater_lg.jpg", 
+        "title": "D. Craig Brater, MD", 
+        "headline": "Dean Emeritus, Indiana University School of Medicine", 
+        "thnail_feature_url": "http://www.kclifesciences.org/wp-content/uploads/2010/11/CraigBrater_lg.jpg", 
+        "created_on": "2014-10-14T17:45:07Z", 
+        "updated_on": "2014-10-15T16:56:05Z"
+    }
+},
+{
+    "pk": 13, 
+    "model": "gateway.author", 
+    "fields": {
+        "thnail_square_url": "http://www.dukehealth.org/physicians/john_wiley_williams_jr/photo_thumbnail", 
+        "title": "John Wiley Williams Jr., MD", 
+        "headline": "Professor of Medicine in Psychiatry and Behavioral Sciences\nDuke University School of Medicine", 
+        "thnail_feature_url": "http://www.dukehealth.org/physicians/john_wiley_williams_jr/photo_thumbnail", 
+        "created_on": "2014-10-14T18:31:16Z", 
+        "updated_on": "2014-10-15T16:55:19Z"
+    }
+},
+{
+    "pk": 14, 
+    "model": "gateway.author", 
+    "fields": {
+        "thnail_square_url": "http://www.dukehealth.org/physicians/christopher_e_cox/photo_thumbnail", 
+        "title": "Christopher E. Cox, MD, MHA, MPH", 
+        "headline": "Associate Professor of Medicine\nCritical Care Specialist, Lung Specialist\nDuke University School of Medicine", 
+        "thnail_feature_url": "http://www.dukehealth.org/physicians/christopher_e_cox/photo_thumbnail", 
+        "created_on": "2014-10-14T18:33:11Z", 
+        "updated_on": "2014-10-15T16:55:07Z"
+    }
+},
+{
+    "pk": 15, 
+    "model": "gateway.author", 
+    "fields": {
+        "thnail_square_url": "http://www.dukemedicine.org/sites/www.dukemedicine.org/files/styles/doctor_thumbnail/public/photos/physician/kimberly-l.blackwell-md.jpg?itok=eMOBMGa-", 
+        "title": "Kimberly L. Blackwell, MD", 
+        "headline": "Professor of Medicine, Assistant Professor in Radiation Oncology\nDuke University School of Medicine", 
+        "thnail_feature_url": "http://www.dukemedicine.org/sites/www.dukemedicine.org/files/styles/doctor_thumbnail/public/photos/physician/kimberly-l.blackwell-md.jpg?itok=eMOBMGa-", 
+        "created_on": "2014-10-14T18:45:50Z", 
+        "updated_on": "2014-10-15T16:55:31Z"
+    }
+},
+{
+    "pk": 16, 
+    "model": "gateway.author", 
+    "fields": {
+        "thnail_square_url": "http://www.dukemedicine.org/sites/www.dukemedicine.org/files/styles/doctor_thumbnail/public/photos/physician/timothy.collins-md_1.jpg?itok=W_6JIPFs", 
+        "title": "Timothy A. Collins, MD", 
+        "headline": "Associate Professor of Neurology\nDuke University School of Medicine", 
+        "thnail_feature_url": "http://www.dukemedicine.org/sites/www.dukemedicine.org/files/styles/doctor_thumbnail/public/photos/physician/timothy.collins-md_1.jpg?itok=W_6JIPFs", 
+        "created_on": "2014-10-14T18:52:10Z", 
+        "updated_on": "2014-10-15T16:55:46Z"
+    }
+},
+{
+    "pk": 17, 
+    "model": "gateway.author", 
+    "fields": {
+        "thnail_square_url": "http://www.dukemedicine.org/sites/www.dukemedicine.org/files/styles/doctor_thumbnail/public/photos/physician/neil-r.macintyre-md.jpg?itok=6_eqixcr", 
+        "title": "Neil R. MacIntyre, MD", 
+        "headline": "Professor of Medicine\nChief, Clinical Services\nDepartment / Division: Medicine / Medicine-Pulmonary \nDuke University Medical Center", 
+        "thnail_feature_url": "http://www.dukemedicine.org/sites/www.dukemedicine.org/files/styles/doctor_thumbnail/public/photos/physician/neil-r.macintyre-md.jpg?itok=6_eqixcr", 
+        "created_on": "2014-10-15T15:19:40Z", 
+        "updated_on": "2014-10-15T16:53:37Z"
+    }
+},
+{
+    "pk": 18, 
+    "model": "gateway.author", 
+    "fields": {
+        "thnail_square_url": "http://www.dukemedicine.org/sites/www.dukemedicine.org/files/styles/doctor_thumbnail/public/photos/physician/robert-t.keenan-md-mph_1.jpg?itok=rtI8uYyq", 
+        "title": "Robert T. Keenan, MD, MPH", 
+        "headline": "Assistant Professor of Medicine Duke University Medical Center\nDepartment / Division: Medicine / Medicine-Rheumatology and Immunology", 
+        "thnail_feature_url": "http://www.dukemedicine.org/sites/www.dukemedicine.org/files/styles/doctor_thumbnail/public/photos/physician/robert-t.keenan-md-mph_1.jpg?itok=rtI8uYyq", 
+        "created_on": "2014-10-15T15:25:35Z", 
+        "updated_on": "2014-10-15T16:53:19Z"
+    }
+},
+{
+    "pk": 19, 
+    "model": "gateway.author", 
+    "fields": {
+        "thnail_square_url": "http://www.dukemedicine.org/sites/www.dukemedicine.org/files/styles/doctor_thumbnail/public/photos/physician/david-p.boyte-md.jpg?itok=vQNg7PFW", 
+        "title": "David P. Boyte, MD", 
+        "headline": "Assistant Professor of Medicine, Hospital Medicine Director of Perioperative Medicine, Duke Regional Hospital", 
+        "thnail_feature_url": "http://www.dukemedicine.org/sites/www.dukemedicine.org/files/styles/doctor_thumbnail/public/photos/physician/david-p.boyte-md.jpg?itok=vQNg7PFW", 
+        "created_on": "2014-10-15T15:31:51Z", 
+        "updated_on": "2014-10-15T16:53:03Z"
+    }
+},
+{
+    "pk": 20, 
+    "model": "gateway.author", 
+    "fields": {
+        "thnail_square_url": "http://doctors.dana-farber.org/photos/0000279.jpg", 
+        "title": "Charles Fuchs, MD, MPH", 
+        "headline": "Director, Gastrointestinal Cancer Center \nProfessor of Medicine, Harvard Medical School", 
+        "thnail_feature_url": "http://doctors.dana-farber.org/photos/0000279.jpg", 
+        "created_on": "2014-10-15T15:39:35Z", 
+        "updated_on": "2014-10-15T16:52:48Z"
+    }
+},
+{
+    "pk": 21, 
+    "model": "gateway.author", 
+    "fields": {
+        "thnail_square_url": "http://www.dukemedicine.org/sites/www.dukemedicine.org/files/styles/doctor_thumbnail/public/photos/physician/andrew-i.wolf-md_0.jpg?itok=CcX1-0Fl", 
+        "title": "Andrew I. Wolf, MD", 
+        "headline": "Assistant Professor of Medicine Duke University Medical Center\nDepartment / Division: Medicine / Medicine - Gastroenterology", 
+        "thnail_feature_url": "http://www.dukemedicine.org/sites/www.dukemedicine.org/files/styles/doctor_thumbnail/public/photos/physician/andrew-i.wolf-md_0.jpg?itok=CcX1-0Fl", 
+        "created_on": "2014-10-15T15:47:28Z", 
+        "updated_on": "2014-10-15T16:52:34Z"
+    }
+},
+{
+    "pk": 22, 
+    "model": "gateway.author", 
+    "fields": {
+        "thnail_square_url": "http://www.dukemedicine.org/sites/www.dukemedicine.org/files/styles/doctor_profile/public/photos/physician/david-p.holland-md-mhs_0.jpg?itok=iVQoHtz5", 
+        "title": "David P. Holland, MD, MHS", 
+        "headline": "Assistant Professor Department of Medicine\nDivision of Infectious Diseases and International Health\nDuke University Medical Center", 
+        "thnail_feature_url": "http://www.dukemedicine.org/sites/www.dukemedicine.org/files/styles/doctor_profile/public/photos/physician/david-p.holland-md-mhs_0.jpg?itok=iVQoHtz5", 
+        "created_on": "2014-10-15T15:52:47Z", 
+        "updated_on": "2014-10-15T16:52:20Z"
+    }
+},
+{
+    "pk": 23, 
+    "model": "gateway.author", 
+    "fields": {
+        "thnail_square_url": "http://www.dukemedicine.org/sites/www.dukemedicine.org/files/styles/doctor_thumbnail/public/photos/physician/s.nicole-hastings-md.jpg?itok=b0PFPDtI", 
+        "title": "S. Nicole Hastings, MD", 
+        "headline": "Associate Professor of Medicine\nDepartment / Division: Medicine / Medicine - Geriatrics \nDuke University Medical Center", 
+        "thnail_feature_url": "http://www.dukemedicine.org/sites/www.dukemedicine.org/files/styles/doctor_thumbnail/public/photos/physician/s.nicole-hastings-md.jpg?itok=b0PFPDtI", 
+        "created_on": "2014-10-15T15:56:18Z", 
+        "updated_on": "2014-10-15T16:52:04Z"
+    }
+},
+{
+    "pk": 24, 
+    "model": "gateway.author", 
+    "fields": {
+        "thnail_square_url": "http://www.dukemedicine.org/sites/www.dukemedicine.org/files/styles/doctor_thumbnail/public/photos/physician/larry-b.goldstein-md.jpg?itok=4uUh3VJF", 
+        "title": "Larry B. Goldstein, MD", 
+        "headline": "Professor of Neurology\nDirector, Duke Stroke Center\nDepartment / Division: Neurology / Stroke and Vascular Neurology", 
+        "thnail_feature_url": "http://www.dukemedicine.org/sites/www.dukemedicine.org/files/styles/doctor_thumbnail/public/photos/physician/larry-b.goldstein-md.jpg?itok=4uUh3VJF", 
+        "created_on": "2014-10-15T16:06:31Z", 
+        "updated_on": "2014-10-15T16:51:49Z"
+    }
+},
+{
+    "pk": 25, 
+    "model": "gateway.author", 
+    "fields": {
+        "thnail_square_url": "http://www.dukehealth.org/physicians/joe_brice_weinberg/photo_thumbnail", 
+        "title": "Joe Brice Weinberg, MD", 
+        "headline": "Professor of Medicine Duke University Medical Center\nDivision of Hematology\nProfessor of Immunology\nAssociate Professor of Obstetrics and Gynecology", 
+        "thnail_feature_url": "http://www.dukehealth.org/physicians/joe_brice_weinberg/photo_thumbnail", 
+        "created_on": "2014-10-15T16:12:41Z", 
+        "updated_on": "2014-10-15T16:51:34Z"
+    }
+},
+{
+    "pk": 26, 
+    "model": "gateway.author", 
+    "fields": {
+        "thnail_square_url": "http://www.dukemedicine.org/sites/www.dukemedicine.org/files/styles/doctor_thumbnail/public/photos/physician/timothy-j.mcmahon-md-phd.jpg?itok=RpvNy0es", 
+        "title": "Timothy J. McMahon, MD, PhD", 
+        "headline": "Associate Professor of Medicine Duke University Medical Center\nDepartment / Division: Medicine / Medicine-Pulmonary", 
+        "thnail_feature_url": "http://www.dukemedicine.org/sites/www.dukemedicine.org/files/styles/doctor_thumbnail/public/photos/physician/timothy-j.mcmahon-md-phd.jpg?itok=RpvNy0es", 
+        "created_on": "2014-10-15T16:45:59Z", 
+        "updated_on": "2014-10-15T16:51:21Z"
+    }
+},
+{
+    "pk": 27, 
+    "model": "gateway.author", 
+    "fields": {
+        "thnail_square_url": "http://www.dukemedicine.org/sites/www.dukemedicine.org/files/styles/doctor_thumbnail/public/photos/physician/j.kevin-harrison-md.jpg?itok=1rpkySEj", 
+        "title": "J. Kevin Harrison, MD", 
+        "headline": "Professor of Medicine Duke University Medical Center\nDepartment / Division: Medicine / Medicine - Cardiology", 
+        "thnail_feature_url": "http://www.dukemedicine.org/sites/www.dukemedicine.org/files/styles/doctor_thumbnail/public/photos/physician/j.kevin-harrison-md.jpg?itok=1rpkySEj", 
+        "created_on": "2014-10-15T16:48:40Z", 
+        "updated_on": "2014-10-15T16:48:40Z"
+    }
+},
+{
+    "pk": 28, 
+    "model": "gateway.author", 
+    "fields": {
+        "thnail_square_url": "http://publichealth.sdsu.edu/wp-content/uploads/2013/06/elva-arredondo.jpg", 
+        "title": "Elva M. Arredondo, PhD", 
+        "headline": "Associate Professor San Diego State University\nDivision of Health Promotion and Behavioral Science\nCo-Director of the Joint Doctoral Program in Health Behavior", 
+        "thnail_feature_url": "http://publichealth.sdsu.edu/wp-content/uploads/2013/06/elva-arredondo.jpg", 
+        "created_on": "2014-10-15T17:05:26Z", 
+        "updated_on": "2014-10-15T17:05:26Z"
+    }
+},
+{
+    "pk": 29, 
+    "model": "gateway.author", 
+    "fields": {
+        "thnail_square_url": "http://www.dukemedicine.org/sites/www.dukemedicine.org/files/styles/doctor_thumbnail/public/photos/physician/carl-l.berg-md.jpg?itok=YnlCHa8H", 
+        "title": "Carl L. Berg, MD", 
+        "headline": "Professor of Medicine Duke University Medical Center\nMedical Director of Abdominal Transplantation\nDepartment / Division: Medicine / Medicine - Gastroenterology", 
+        "thnail_feature_url": "http://www.dukemedicine.org/sites/www.dukemedicine.org/files/styles/doctor_thumbnail/public/photos/physician/carl-l.berg-md.jpg?itok=YnlCHa8H", 
+        "created_on": "2014-10-15T17:11:11Z", 
+        "updated_on": "2014-10-15T17:11:11Z"
+    }
+},
+{
+    "pk": 30, 
+    "model": "gateway.author", 
+    "fields": {
+        "thnail_square_url": "http://www.frontiersin.org/files//Profile%20Library/39234/Thumb_203_203.jpg?date=14766", 
+        "title": "Souha Kanj, MD", 
+        "headline": "Professor of Medicine Head, Division of Infectious Diseases\nChair, Infection Control and Prevention Program, American University of Beirut Medical Center, Beirut, Lebanon\nConsultant Professor, Duke University Medical Center", 
+        "thnail_feature_url": "http://www.frontiersin.org/files//Profile%20Library/39234/Thumb_203_203.jpg?date=14766", 
+        "created_on": "2014-10-15T17:18:06Z", 
+        "updated_on": "2015-11-16T15:39:00Z"
+    }
+}
+]

@@ -1,5 +1,6 @@
 import uuid
 from django.db import models
+from django.contrib.postgres.fields import JSONField
 # include google API apiclient resources
 from apiclient.discovery import build
 from apiclient.errors import HttpError as gooleApiHttpError
@@ -25,6 +26,7 @@ class Video(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     provider = models.CharField(u'Provider', max_length=50, choices=PROVIDER_CHOICES)
     provider_id = models.CharField(u'Provider ID', max_length=50)
+    provider_resource = JSONField()
 
     def __str__(self):
         return self.provider
@@ -48,6 +50,12 @@ class YouTube:
         options['part'] = 'id, snippet'
         yt = cls.get_service()
         return yt.search().list(**options).execute()
+
+    # @classmethod
+    # def get_video_list(cls, ids):
+    #     yt = cls.get_service()
+    #     return yt.videos().list(id=ids, maxResults=1, 
+    #         part='id, snippet, contentDetails, player').execute()['items']
 
     @classmethod
     def get_video(cls, id):

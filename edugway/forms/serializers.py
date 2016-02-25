@@ -12,7 +12,7 @@ class FormUpdateSerializer(FormSerializer):
 	type = serializers.ReadOnlyField()
 
 class FieldSerializer(DynamicFieldsModelSerializer):
-	form = FormSerializer(many=False, read_only=True)
+	form = FormSerializer(many=False, read_only=True, fields=('id',))
 	sequence = serializers.ReadOnlyField()
 	name = serializers.ReadOnlyField()
    
@@ -21,7 +21,7 @@ class FieldSerializer(DynamicFieldsModelSerializer):
 	    fields = ('id', 'form', 'sequence', 'type', 'name', 'label')
 
 class ChoiceSerializer(DynamicFieldsModelSerializer):
-	field = FieldSerializer(many=False, read_only=True)
+	field = FieldSerializer(many=False, read_only=True, fields=('id',))
 	sequence = serializers.ReadOnlyField()
 	name = serializers.ReadOnlyField()
 	# only relevant for forms of type "assessment"

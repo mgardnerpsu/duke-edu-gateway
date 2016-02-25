@@ -176,10 +176,13 @@ class ReSequenceChoicesTests(APITestCase):
 		# mark choice 2, 3, 4 correct
 		url = reverse('field-choices-mark-correct', args=[self.choices[2]['id']])
 		response = self.client.put(url)
+		self.assertEqual(response.status_code, status.HTTP_200_OK)
 		url = reverse('field-choices-mark-correct', args=[self.choices[3]['id']])
 		response = self.client.put(url)
+		self.assertEqual(response.status_code, status.HTTP_200_OK)
 		url = reverse('field-choices-mark-correct', args=[self.choices[4]['id']])
 		response = self.client.put(url)
+		self.assertEqual(response.status_code, status.HTTP_200_OK)
 		# verify only choice 4 is correct
 		url = reverse('form-fields-choices', args=[self.field_id])
 		response = self.client.get(url)

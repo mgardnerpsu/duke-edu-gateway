@@ -1,5 +1,6 @@
 import collections
 import isodate
+from underscore import _
 from rest_framework import serializers, validators
 from edugway import settings
 from edugway.videos.models import Video, YouTube
@@ -28,14 +29,21 @@ class VideoSerializer(DynamicFieldsModelSerializer):
 
     def __init__(self, *args, **kwargs):
         super(VideoSerializer, self).__init__(*args, **kwargs)
-        self.provider_content = None
+        self.provider_video_list = None
+        if args:
+            if isinstance(args[0], list):
+               videos = args[0]
+               video_ids = ','.join([video.provider_id for video in videos])
+               self.provider_video_list = YouTube.get_video_list(video_ids)
 
     # get the youtube video resource content
     def get_provider_content(self, provider_id):
-        if self.provider_content is None:
-            #print('calling google get video api')
-            self.provider_content = YouTube.get_video(provider_id)
-        return self.provider_content
+        if self.provider_video_list is not None:
+            #print('pulling video from list')
+            return _.findWhere(self.provider_video_list, {'id': provider_id})
+        else:
+            #print('calling get video')
+            return YouTube.get_video(provider_id)
 
     def get_title(self, obj):
         return self.get_provider_content(obj.provider_id)['snippet']['title']

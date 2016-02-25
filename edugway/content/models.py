@@ -26,8 +26,6 @@ class Course(models.Model):
     evaluation = models.ForeignKey(Form, on_delete=models.PROTECT, null=True,
         choices=[(f.id, f.title) for f in Form.objects.filter(type=Form.TYPE_EVALUATION)],
         related_name='evaluation')
-    # DEPRECATED - only support a single author for alpha
-    #authors = models.ManyToManyField('authors.Author', through='CourseAuthor')
 
 class Category(models.Model):
     '''
@@ -59,17 +57,3 @@ class Credit(models.Model):
     
     def __str__(self):
         return self.label
-
-# DEPRECATED - only support a single author for alpha.
-# class CourseAuthor(models.Model):
-#     '''
-#     A course author resource - represents association of author to course.
-#     '''
-#     class Meta:
-#         db_table = 'course_author'
-#         verbose_name = u'Course Author'
-#         #unique_together = (('course', 'author'),)
-    
-#     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-#     course = models.ForeignKey(Course, unique=True, related_name='course_authors')     
-#     author = models.ForeignKey(Author, related_name='author_courses')

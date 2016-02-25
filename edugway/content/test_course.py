@@ -95,7 +95,7 @@ class CourseTests(APITestCase):
         data =  {
             'title': 'A sample course - updated',
             'descr': 'A sample course description',
-            'learning_objective': 'These are the learning objectives for this course'               
+            'learning_objective': 'These are the sample learning objectives for this course'               
             }
         response = self.client.put(url, data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -161,31 +161,3 @@ class CourseTests(APITestCase):
         response = self.client.patch(url, data)
         #print(json.dumps(response.data, indent=4))
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-
-    # These test cases may be relevant if it is determined post-alpha that
-    # we need to support more than one author per course...
-    # def test_create_course_author(self):
-    #     url = reverse('course-authors', args=[self.course_id])
-    #     data = {'author_id': self.author_id}
-    #     response = self.client.post(url, data)
-    #     #print(json.dumps(response.data, indent=4))
-    #     self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-    #     # try and create another author for course - should delete existing
-    #     # author and create new relation... only one author relation is allowed...
-    #     data = {'author_id': self.author_id}
-    #     response = self.client.post(url, data)
-    #     #print(json.dumps(response.data, indent=4))
-    #     self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-
-    # def test_list_course_authors(self):
-    #     # create the course author
-    #     url = reverse('course-authors', args=[self.course_id])
-    #     data = {'author_id': self.author_id}
-    #     response = self.client.post(url, data)
-    #     self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-    #     # lists the course author
-    #     url = reverse('course-authors', args=[self.course_id])
-    #     response = self.client.get(url)
-    #     print(json.dumps(response.data, indent=4))
-    #     self.assertEqual(response.status_code, status.HTTP_200_OK)
-
