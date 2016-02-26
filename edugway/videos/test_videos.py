@@ -22,7 +22,7 @@ class VideoTests(APITestCase):
 		url = reverse('video-list')
 		data = {'provider': Video.PROVIDER_YOUTUBE,  'provider_id': 'XUaqnxHn-QY'}
 		response = self.client.post(url, data)
-		#print(json.dumps(response.data, indent=4))
+		# print(json.dumps(response.data, indent=4))
 		self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
 	def test_create_duplicate_video(self):
@@ -66,6 +66,3 @@ class VideoTests(APITestCase):
 		response = self.client.get(response.data['previous'])
 		#print(json.dumps(response.data, indent=4))
 		self.assertEqual(response.status_code, status.HTTP_200_OK)		
-
-	
-

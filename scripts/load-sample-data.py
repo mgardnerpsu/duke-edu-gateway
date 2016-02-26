@@ -172,7 +172,7 @@ for video in Video.objects.all():
     data = {'credit_id': random.choice(Credit.objects.all()).id}
     response = client.patch(url, data)
     assert (response.status_code == 200)
-    data = {'video_id': random.choice(Video.objects.all()).id}
+    data = {'video_id': video.id}
     response = client.patch(url, data)
     assert (response.status_code == 200)
     data = {'assessment_id': random.choice(Form.objects.filter(type='assessment')).id}

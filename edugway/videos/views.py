@@ -23,6 +23,12 @@ class VideoViewSet(mixins.CreateModelMixin, mixins.ListModelMixin,
     queryset = Video.objects.all()
     serializer_class = VideoSerializer
 
+    def perform_create(self, serializer):
+        provider_id = serializer.validated_data['provider_id']
+        provider_resource = YouTube.get_video(provider_id)
+        serializer.validated_data['provider_resource'] = provider_resource
+        serializer.save()
+
     def get_queryset(self):
         f = VideoFilter(self.request.query_params, queryset=Video.objects.all())
         return f.qs
