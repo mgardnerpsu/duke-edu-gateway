@@ -26,7 +26,7 @@ class FormViewSet(viewsets.ModelViewSet):
             serializer = FieldSerializer(data=request.data, many=False, 
                 context={'request': request})
             serializer.is_valid(raise_exception=True)
-            serializer.validated_data['form'] = form
+            serializer.validated_data['form_id'] = form.id
             max_sequence = form.fields.all().aggregate(
                 Max('sequence'))['sequence__max']
             sequence = (1 if (max_sequence is None) else (max_sequence + 1))
@@ -57,7 +57,7 @@ class FieldViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin,
             field.save()
         instance.delete()
 
-    @detail_route(methods=['PUT'], url_path='move-down')
+    @detail_route(methods=['PUT'])
     def move_seq_down(self, request, pk=None):
         field_down = self.get_object()
         form = field_down.form
@@ -79,7 +79,7 @@ class FieldViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin,
             context={'request': request})
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-    @detail_route(methods=['PUT'], url_path='move-up')
+    @detail_route(methods=['PUT'])
     def move_seq_up(self, request, pk=None):
         field_up = self.get_object()
         form = field_up.form
@@ -108,7 +108,7 @@ class FieldViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin,
             serializer = ChoiceSerializer(data=request.data, many=False, 
                 context={'request': request})
             serializer.is_valid(raise_exception=True)
-            serializer.validated_data['field'] = field
+            serializer.validated_data['field_id'] = field.id
             max_sequence = field.choices.all().aggregate(
                 Max('sequence'))['sequence__max']
             sequence = (1 if (max_sequence is None) else (max_sequence + 1))
@@ -139,7 +139,7 @@ class ChoiceViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin,
             choice.save()
         instance.delete()
 
-    @detail_route(methods=['PUT'], url_path='move-down')
+    @detail_route(methods=['PUT'])
     def move_seq_down(self, request, pk=None):
         choice_down = self.get_object()
         field = choice_down.field
@@ -161,7 +161,7 @@ class ChoiceViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin,
             context={'request': request})
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-    @detail_route(methods=['PUT'], url_path='move-up')
+    @detail_route(methods=['PUT'])
     def move_seq_up(self, request, pk=None):
         choice_up = self.get_object()
         field = choice_up.field
@@ -183,7 +183,7 @@ class ChoiceViewSet(mixins.RetrieveModelMixin, mixins.UpdateModelMixin,
             context={'request': request})
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-    @detail_route(methods=['PUT'], url_path='mark-correct')
+    @detail_route(methods=['PUT'])
     def mark_correct(self, request, pk=None):
         correct_choice = self.get_object()
         correct_choice.is_correct = True

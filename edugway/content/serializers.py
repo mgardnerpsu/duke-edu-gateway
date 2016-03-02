@@ -1,31 +1,31 @@
 import collections
 from rest_framework import serializers, validators
 from edugway import settings
-from edugway.content.models import Category, Credit, Course
+from edugway.content.models import Category, Credit, Course, CourseCategory
 from edugway.forms.models import Form
 from edugway.authors.serializers import AuthorSerializer
 from edugway.videos.serializers import VideoSerializer
 from edugway.forms.serializers import FormSerializer
+from edugway.utils.serializers import DynamicFieldsModelSerializer
 
-class CategorySerializer(serializers.ModelSerializer):
+class CategorySerializer(DynamicFieldsModelSerializer):
     class Meta:
         model = Category
         fields = ('id', 'label', 'color', ) 
 
-class CreditSerializer(serializers.ModelSerializer):
+class CreditSerializer(DynamicFieldsModelSerializer):
     class Meta:
         model = Credit
         fields = ('id', 'label', 'descr', ) 
 
-class CourseSerializer(serializers.ModelSerializer):
+class CourseSerializer(DynamicFieldsModelSerializer):
     author_id = serializers.UUIDField(write_only=True, required=False, allow_null=True)
-    category_id = serializers.UUIDField(write_only=True, required=False, allow_null=True)
     credit_id = serializers.UUIDField(write_only=True, required=False, allow_null=True)
     video_id = serializers.UUIDField(write_only=True, required=False, allow_null=True)
     assessment_id = serializers.UUIDField(write_only=True, required=False, allow_null=True)
     evaluation_id = serializers.UUIDField(write_only=True, required=False, allow_null=True)
     author = AuthorSerializer(many=False, read_only=True)
-    category = CategorySerializer(many=False, read_only=True)
+    categories = serializers.SerializerMethodField()
     credit = CreditSerializer(many=False, read_only=True)
     video = VideoSerializer(many=False, read_only=True)
     assessment = FormSerializer(many=False, read_only=True)
@@ -34,8 +34,13 @@ class CourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Course
         fields = ('id', 'title', 'descr', 'learning_objective', 'author_id', 'author', 
-            'category_id', 'category', 'credit_id', 'credit', 'video_id', 'video',
+            'categories', 'credit_id', 'credit', 'video_id', 'video',
             'assessment_id', 'assessment', 'evaluation_id', 'evaluation', )
+
+    def get_categories(self, obj):         
+        categories = obj.coursecategory_set.all()    
+        serializer = CourseCategorySerializer(categories, many=True, context=self.context)
+        return serializer.data
 
     def validate(self, data):
         # verify form type relations are valid.
@@ -57,4 +62,26 @@ class CourseSerializer(serializers.ModelSerializer):
                     'Invalid form type specified for a course evaluation.')
 
         return data
+
+class CourseCategorySerializer(DynamicFieldsModelSerializer):
+    course_id = serializers.UUIDField(write_only=True)
+    category_id = serializers.UUIDField(write_only=True)
+    course = serializers.SerializerMethodField()
+    category = CategorySerializer(many=False, read_only=True)
+
+    validators = [
+        validators.UniqueTogetherValidator(
+         queryset=CourseCategory.objects.all(),
+         fields=('course_id', 'category_id', ),
+         message='The specified category has already been associated to this course.'
+        )
+    ]
+    
+    class Meta:
+        model = CourseCategory
+        fields = ('id', 'course_id', 'course', 'category_id', 'category', ) 
+
+    def get_course(self, obj):
+        return {'id': str(obj.course.id)}
+
  

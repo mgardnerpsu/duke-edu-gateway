@@ -12,38 +12,38 @@ class FormTests(APITestCase):
 
 	def setUp(self):
 		# setup data for each test case
-		url = reverse('form-list')
+		url = reverse('content:form-list')
 		self.form_data = {'type': Form.TYPE_ASSESSMENT, 'title': 'sample form'}
 		response = self.client.post(url, self.form_data)
 		self.form_id = response.data['id']
 
 	def test_create_form(self):
-		url = reverse('form-list')
+		url = reverse('content:form-list')
 		data = {'type': Form.TYPE_ASSESSMENT, 'title': 'sample form'}
 		response = self.client.post(url, data)
 		#print(json.dumps(response.data, indent=4))
 		self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
 	def test_create_form_with_bad_data(self):
-		url = reverse('form-list')
+		url = reverse('content:form-list')
 		data = {}
 		response = self.client.post(url, data)
 		#print(json.dumps(response.data, indent=4))
 		self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
 	def test_list_forms(self):
-		url = reverse('form-list')
+		url = reverse('content:form-list')
 		response = self.client.get(url)
 		#print(json.dumps(response.data, indent=4))
 		self.assertEqual(response.status_code, status.HTTP_200_OK)
 
 	def test_get_form(self):
-		url = reverse('form-detail', args=[self.form_id])
+		url = reverse('content:form-detail', args=[self.form_id])
 		response = self.client.get(url)
 		self.assertEqual(response.status_code, status.HTTP_200_OK)
 
 	def test_update_form(self):
-		url = reverse('form-detail', args=[self.form_id])
+		url = reverse('content:form-detail', args=[self.form_id])
 		data = {'type': Form.TYPE_EVALUATION, 'title': 'sample form - updated'}
 		response = self.client.put(url, data)
 		self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -52,7 +52,7 @@ class FormTests(APITestCase):
 		self.assertEqual(response.data['type'], Form.TYPE_ASSESSMENT)
 
 	def test_patch_form(self):
-		url = reverse('form-detail', args=[self.form_id])
+		url = reverse('content:form-detail', args=[self.form_id])
 		data = {'type': Form.TYPE_EVALUATION, 'title': 'sample form - patched'}
 		response = self.client.patch(url, data)
 		self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -61,12 +61,12 @@ class FormTests(APITestCase):
 		self.assertEqual(response.data['type'], Form.TYPE_ASSESSMENT)
 
 	def test_delete_form(self):
-		url = reverse('form-detail', args=[self.form_id])
+		url = reverse('content:form-detail', args=[self.form_id])
 		response = self.client.delete(url)
 		self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
 	def test_create_field(self):
-		url = reverse('form-fields', args=[self.form_id])
+		url = reverse('content:form-fields', args=[self.form_id])
 		data = {'type': Field.TYPE_RADIO, 'label': 'sample field'}
 		response = self.client.post(url, data)
 		#print(json.dumps(response.data, indent=4))

@@ -24,7 +24,7 @@ class ChoiceSerializer(DynamicFieldsModelSerializer):
 	field = FieldSerializer(many=False, read_only=True, fields=('id',))
 	sequence = serializers.ReadOnlyField()
 	name = serializers.ReadOnlyField()
-	# only relevant for forms of type "assessment"
+	# this field is only relevant for forms of type "assessment"
 	is_correct = serializers.ReadOnlyField()
    
 	class Meta:

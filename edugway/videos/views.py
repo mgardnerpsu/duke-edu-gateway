@@ -66,7 +66,7 @@ class VideoViewSet(mixins.CreateModelMixin, mixins.ListModelMixin,
         
         next_page_token = videos.get('nextPageToken', None)
         prev_page_token = videos.get('prevPageToken', None)
-        base_url = reverse('video-youtube')
+        base_url = reverse('content:video-youtube')
 
         count = videos['pageInfo']['totalResults']
 

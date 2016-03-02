@@ -1,8 +1,18 @@
 [
     {
+        "pk": "c88fafb2-2cb4-493f-9b6e-917aa5f2dca4", 
+        "model": "content.category", 
+        "fields": {
+            "name": "spotlight",
+            "label": "Spotlight", 
+            "color": "#000000"
+        }
+    },
+    {
         "pk": "9bc309de-fcdf-4110-8959-31bf85ec5039", 
         "model": "content.category", 
         "fields": {
+            "name": "cardiology",
             "label": "Cardiology", 
             "color": "#fce300"
         }
@@ -11,6 +21,7 @@
         "pk": "e17de75f-8abb-47be-9a9b-cd1cef0006d4", 
         "model": "content.category", 
         "fields": {
+            "name": "hematology_oncology", 
             "label": "Hematology & Oncology", 
             "color": "#f5c867"
         }
@@ -19,6 +30,7 @@
         "pk": "587c020f-d388-4470-be68-30dee19b8927", 
         "model": "content.category", 
         "fields": {
+            "name": "general_internal_medicine", 
             "label": "General Internal Medicine", 
             "color": "#f28520"
         }
@@ -27,6 +39,7 @@
         "pk": "a17a87e2-3786-46d8-8306-27ff7ea3ea6c", 
         "model": "content.category", 
         "fields": {
+            "name": "gastroenterology", 
             "label": "Gastroenterology", 
             "color": "#e45dbf"
         }
@@ -35,6 +48,7 @@
         "pk": "dcb1935d-d92e-4e09-8bfc-a642092bae59", 
         "model": "content.category", 
         "fields": {
+            "name": "endocrinology", 
             "label": "Endocrinology", 
             "color": "#dc4a37"
         }
@@ -43,6 +57,7 @@
         "pk": "43774cdc-a21e-42b3-9862-25bd33b81a70", 
         "model": "content.category", 
         "fields": {
+            "name": "medical_genetics", 
             "label": "Medical Genetics", 
             "color": "#823b34"
         }
@@ -51,6 +66,7 @@
         "pk": "8ddede85-19af-4168-a569-591bc349e560", 
         "model": "content.category", 
         "fields": {
+            "name": "rheumatology", 
             "label": "Rheumatology", 
             "color": "#5f259f"
         }
@@ -59,6 +75,7 @@
         "pk": "47355b31-6e2e-4568-8b84-92e267828ba9", 
         "model": "content.category", 
         "fields": {
+            "name": "pulmonary_critical_care_medicine", 
             "label": "Pulmonary & Critical Care Medicine", 
             "color": "#0057b8"
         }
@@ -67,6 +84,7 @@
         "pk": "c4d3103a-fd33-4e11-973c-a305f0ae91f0", 
         "model": "content.category", 
         "fields": {
+            "name": "nephrology", 
             "label": "Nephrology", 
             "color": "#4fa3c7"
         }
@@ -75,6 +93,7 @@
         "pk": "f50b8593-8387-467e-8de1-f6c9fbc40d0b", 
         "model": "content.category", 
         "fields": {
+            "label": "infectious_diseases", 
             "label": "Infectious Diseases", 
             "color": "#009b77"
         }
@@ -83,6 +102,7 @@
         "pk": "4795ddfc-34d4-4f77-bb3a-f3a64cb12a96", 
         "model": "content.category", 
         "fields": {
+            "name": "geriatrics", 
             "label": "Geriatrics", 
             "color": "#97d700"
         }
@@ -91,6 +111,7 @@
         "pk": "c70861ef-5a6b-4b8b-8275-14f400deb5d0", 
         "model": "content.category", 
         "fields": {
+            "label": "neurology", 
             "label": "Neurology", 
             "color": "#bec621"
         }

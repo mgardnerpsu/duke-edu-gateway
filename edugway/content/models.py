@@ -17,7 +17,6 @@ class Course(models.Model):
     descr = models.TextField(u'Description')
     learning_objective = models.TextField(u'Learning Objective')
     author = models.ForeignKey(Author, on_delete=models.PROTECT, null=True)
-    category = models.ForeignKey('content.Category', on_delete=models.PROTECT, null=True)
     credit = models.ForeignKey('content.Credit', on_delete=models.PROTECT, null=True)
     video = models.ForeignKey(Video, on_delete=models.PROTECT, null=True)
     assessment = models.ForeignKey(Form, on_delete=models.PROTECT, null=True, 
@@ -36,11 +35,25 @@ class Category(models.Model):
         verbose_name = u'Category'
     
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    name = models.CharField(u'Name', max_length=40)
     label = models.CharField(u'Label', max_length=60)
     color = models.CharField(u'Hex Color for UX', max_length=20)
     
     def __str__(self):
         return self.label
+
+class CourseCategory(models.Model):
+    '''
+    A course category represents an association of a category to a course.
+    '''
+    class Meta:
+        db_table = 'course_category'
+        verbose_name = u'Course Category'
+        unique_together = (('course', 'category'),)
+    
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    course = models.ForeignKey(Course)    
+    category = models.ForeignKey(Category)
 
 class Credit(models.Model):
     '''

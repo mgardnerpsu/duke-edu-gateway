@@ -19,12 +19,12 @@ class VideoSerializer(DynamicFieldsModelSerializer):
                 'watch_url', 'duration', 'thumbnails', ) 
 
     validators = [
-            validators.UniqueTogetherValidator(
-                queryset=Video.objects.all(),
-                fields=('provider', 'provider_id', ),
-                message='The provider (YouTube, Vimeo, etc.) video already exists.'
-            )
-        ]
+        validators.UniqueTogetherValidator(
+            queryset=Video.objects.all(),
+            fields=('provider', 'provider_id', ),
+            message='The provider (YouTube, Vimeo, etc.) video already exists.'
+        )
+    ]
 
     def get_title(self, obj):
         return obj.provider_resource['snippet']['title']
