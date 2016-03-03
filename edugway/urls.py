@@ -37,8 +37,8 @@ content_router.register(r'courses', content_views.CourseViewSet)
 content_router.register(r'course_categories', 
         content_views.CourseCategoryViewSet, base_name='course-categories')
 
-# delivery_router = routers.DefaultRouter(trailing_slash=False)
-# delivery_router.register(r'courses', delivery_views.CourseViewSet)
+delivery_router = routers.DefaultRouter(trailing_slash=False)
+delivery_router.register(r'courses', delivery_views.CourseViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
@@ -46,6 +46,6 @@ urlpatterns = [
     # do not use django admin
 	#url(r'^admin/', admin.site.urls),
     url(r'^content/api/', include(content_router.urls, namespace='content')),
-    # url(r'^delivery/api/', include(delivery_router.urls, namespace='delivery')),
+    url(r'^delivery/api/', include(delivery_router.urls, namespace='delivery')),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]

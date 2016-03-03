@@ -1,7 +1,7 @@
 import uuid
 import collections
 from django.db import models
-from jsonfield import JSONField
+from django.contrib.postgres.fields import JSONField
 # include google API apiclient resources
 from apiclient.discovery import build
 from apiclient.errors import HttpError as gooleApiHttpError
@@ -27,7 +27,7 @@ class Video(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     provider = models.CharField(u'Provider', max_length=50, choices=PROVIDER_CHOICES)
     provider_id = models.CharField(u'Provider ID', max_length=50)
-    provider_resource = JSONField(load_kwargs={'object_pairs_hook': collections.OrderedDict})
+    provider_resource = JSONField()
 
     def __str__(self):
         return self.provider
