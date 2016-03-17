@@ -2,7 +2,7 @@ machine:
   python:
     version: pypy-3.4.3
   environment:
-  	DATABASE_URL=postgres:///circle_test
+    DATABASE_URL=postgres:///circle_test
 deployment:
   heroku-dev:
     branch: develop
