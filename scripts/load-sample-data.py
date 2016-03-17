@@ -40,7 +40,7 @@ choice_label_base = 'This is answer content for testing ' + \
 
 # create the form
 for x in range(1, 51):
-    url = reverse('form-list')
+    url = reverse('content:form-list')
     data = {
         'type': random.choice([Form.TYPE_ASSESSMENT, Form.TYPE_EVALUATION]),
         'title': form_title_base
@@ -50,7 +50,7 @@ for x in range(1, 51):
     form_id = response.data['id']
     # create some fields (questions)
     for x in range(1, 6):
-        url = reverse('form-fields', args=[form_id])
+        url = reverse('content:form-fields', args=[form_id])
         data = {
             'type': random.choice([Field.TYPE_RADIO, Field.TYPE_DROPDOWN]),
             'label': field_label_base
@@ -60,7 +60,7 @@ for x in range(1, 51):
         field_id = response.data['id']
         # create some choices (answers)
         for x in range(1, 5):
-            url = reverse('form-fields-choices', args=[field_id])
+            url = reverse('content:form-fields-choices', args=[field_id])
             data = {
                 'label': choice_label_base
                 }
@@ -70,10 +70,10 @@ for x in range(1, 51):
 # set a random correct answer for assessment forms
 for field in Field.objects.filter(form__type=Form.TYPE_ASSESSMENT):
     choice = random.choice(field.choices.all())
-    url = reverse('field-choices-mark-correct', args=[choice.id])
+    url = reverse('content:field-choices-mark-correct', args=[choice.id])
     response = client.put(url)
     assert (response.status_code == 200)
-    url = reverse('field-choices-detail', args=[choice.id])
+    url = reverse('content:field-choices-detail', args=[choice.id])
     response = client.patch(url, data={'label': choice.label + ' [correct choice]'})
     assert (response.status_code == 200)
 
@@ -86,7 +86,7 @@ with open('./scripts/author.json') as author_data:
     authors = json.load(author_data)
     for author in authors:
         author = author['fields']
-        url = reverse('author-list')
+        url = reverse('content:author-list')
         data = {
             'title': author['title'],
             'headline': author['headline'],
@@ -106,7 +106,7 @@ channel_ids = (
     'UCNhXTS_yLO9HgFuiQuhf2AA' # Duke Health
     )
 
-url = reverse('video-youtube')
+url = reverse('content:video-youtube')
 response = client.get(url, {'q': '', 'channelId': 'UCm8DRqjkykFsX941iJFSSig'})
 assert (response.status_code == 200)
 
@@ -114,7 +114,7 @@ next_page = True
 while next_page:
 
     for yt_video in response.data['results']:
-        url = reverse('video-list')
+        url = reverse('content:video-list')
         data = {
             'provider': Video.PROVIDER_YOUTUBE,  
             'provider_id': yt_video['id']['videoId']
@@ -157,28 +157,41 @@ for video in Video.objects.all():
     }
     if not data['descr'].strip():
         data['descr'] = 'A sample course description for testing the Little Green Web portal.'
-    url = reverse('course-list')
+    url = reverse('content:course-list')
     response = client.post(url, data)
     assert (response.status_code == 201)
     id = response.data['id']
-    # associate reference content
-    url = reverse('course-detail', args=[id])
+    # associate author
+    url = reverse('content:course-detail', args=[id])
     data = {'author_id': random.choice(Author.objects.all()).id}
     response = client.patch(url, data)
     assert (response.status_code == 200)
-    data = {'category_id': random.choice(Category.objects.all()).id}
-    response = client.patch(url, data)
-    assert (response.status_code == 200)
+    # associate credit
     data = {'credit_id': random.choice(Credit.objects.all()).id}
     response = client.patch(url, data)
     assert (response.status_code == 200)
+    # associate video
     data = {'video_id': video.id}
     response = client.patch(url, data)
     assert (response.status_code == 200)
+    # associate assessment
     data = {'assessment_id': random.choice(Form.objects.filter(type='assessment')).id}
     response = client.patch(url, data)
     assert (response.status_code == 200)
+    # associate evaluation
     data = {'evaluation_id': random.choice(Form.objects.filter(type='evaluation')).id}
     response = client.patch(url, data)
     assert (response.status_code == 200)
-
+    # associate category
+    url = reverse('content:course-categories', args=[id])
+    data = {'category_id': random.choice(Category.objects.all()).id}
+    response = client.post(url, data)
+    assert (response.status_code == 201)
+    # publish the course
+    url = reverse('content:course-publish', args=[id])
+    data =  {
+        'release_on': timezone.now(),
+        'expire_on': timezone.now() + relativedelta(years=1)  
+    }
+    response = client.post(url, data)
+    assert (response.status_code == 201)

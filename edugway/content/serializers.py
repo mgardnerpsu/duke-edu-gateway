@@ -1,7 +1,8 @@
 import collections
 from rest_framework import serializers, validators
 from edugway import settings
-from edugway.content.models import Category, Credit, Course, CourseCategory
+from edugway.content.models import Category, Credit, Course, \
+        CourseCategory, PubCourse
 from edugway.forms.models import Form
 from edugway.authors.serializers import AuthorSerializer
 from edugway.videos.serializers import VideoSerializer
@@ -84,4 +85,20 @@ class CourseCategorySerializer(DynamicFieldsModelSerializer):
     def get_course(self, obj):
         return {'id': str(obj.course.id)}
 
+class PubCourseSerializer(DynamicFieldsModelSerializer):
+    course = serializers.SerializerMethodField()
+    version_number = serializers.ReadOnlyField()
+    version_on = serializers.DateTimeField(read_only=True)
+    is_current_version = serializers.ReadOnlyField()
+    content_jsonb = serializers.JSONField(read_only=True)
+    content_json = serializers.JSONField(read_only=True)
+    
+    class Meta:
+        model = PubCourse
+        fields = ('id', 'course', 'version_number', 'version_on',
+            'is_current_version', 'release_on', 'expire_on', 
+            'content_jsonb', 'content_json', )
+
+    def get_course(self, obj):
+        return {'id': str(obj.course.id)}
  

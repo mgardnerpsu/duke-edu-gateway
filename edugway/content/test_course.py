@@ -1,5 +1,7 @@
 import json
 import random
+from dateutil.relativedelta import relativedelta
+from underscore import _
 from django.core.urlresolvers import reverse
 from django.utils import timezone
 from rest_framework import status
@@ -175,3 +177,43 @@ class CourseTests(APITestCase):
         response = self.client.patch(url, data)
         #print(json.dumps(response.data, indent=4))
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_publish_course(self):
+        # build a course with required content
+        url = reverse('content:course-detail', args=[self.course_id])
+        data =  {'author_id': self.author_id}
+        response = self.client.patch(url, data)
+        url = reverse('content:course-categories', args=[self.course_id])
+        data =  {'category_id': self.category_id}
+        response = self.client.post(url, data)
+        url = reverse('content:course-detail', args=[self.course_id])
+        data =  {'credit_id': self.credit_id}
+        response = self.client.patch(url, data)
+        url = reverse('content:course-detail', args=[self.course_id])
+        data =  {'video_id': self.video_id}
+        response = self.client.patch(url, data)
+        url = reverse('content:course-detail', args=[self.course_id])
+        data =  {'assessment_id': self.assessment_id}
+        response = self.client.patch(url, data)
+        url = reverse('content:course-detail', args=[self.course_id])
+        data =  {'evaluation_id': self.evaluation_id}
+        response = self.client.patch(url, data)
+
+        # publish the course several times
+        url = reverse('content:course-publish', args=[self.course_id])
+        data =  {
+            'release_on': timezone.now(),
+            'expire_on': timezone.now() + relativedelta(years=1)  
+        }
+        response = self.client.post(url, data)
+        response = self.client.post(url, data)
+        response = self.client.post(url, data)
+        #print(json.dumps(response.data, indent=4))
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+        # list publishing history
+        response = self.client.get(url, data)
+        #print(json.dumps(response.data, indent=4))
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(_.pluck(response.data, 'version_number'), [3, 2, 1])
+        self.assertEqual(_.pluck(response.data, 'is_current_version'), [True, False, False])

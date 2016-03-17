@@ -2,6 +2,7 @@ import uuid
 import collections
 from django.db import models
 from django.contrib.postgres.fields import JSONField
+#from django_pgjsonb import JSONField
 # include google API apiclient resources
 from apiclient.discovery import build
 from apiclient.errors import HttpError as gooleApiHttpError
@@ -30,7 +31,7 @@ class Video(models.Model):
     provider_resource = JSONField()
 
     def __str__(self):
-        return self.provider
+        return self.provider + '[' + self.provider_id + ']' 
 
 class YouTube:
     '''
