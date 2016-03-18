@@ -22,11 +22,9 @@ class Course(models.Model):
     author = models.ForeignKey(Author, on_delete=models.PROTECT, null=True)
     credit = models.ForeignKey('content.Credit', on_delete=models.PROTECT, null=True)
     video = models.ForeignKey(Video, on_delete=models.PROTECT, null=True)
-    assessment = models.ForeignKey(Form, on_delete=models.PROTECT, null=True, 
-        choices=[(f.id, f.title) for f in Form.objects.filter(type=Form.TYPE_ASSESSMENT)],
-        related_name='assessment', )
-    evaluation = models.ForeignKey(Form, on_delete=models.PROTECT, null=True,
-        choices=[(f.id, f.title) for f in Form.objects.filter(type=Form.TYPE_EVALUATION)],
+    assessment = models.ForeignKey(Form, on_delete=models.PROTECT, null=True,
+        related_name='assessment')
+    evaluation = models.ForeignKey(Form, on_delete=models.PROTECT, null=True, 
         related_name='evaluation')
 
     @property

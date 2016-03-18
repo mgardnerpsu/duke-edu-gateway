@@ -40,8 +40,8 @@ content_router.register(r'course_categories',
 delivery_router = routers.DefaultRouter(trailing_slash=False)
 delivery_router.register(r'courses', delivery_views.CourseViewSet)
 
-# Wire up our API using automatic URL routing.
-# Additionally, we include login URLs for the browsable API.
+# # Wire up our API using automatic URL routing.
+# # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
     # do not use django admin
 	#url(r'^admin/', admin.site.urls),
