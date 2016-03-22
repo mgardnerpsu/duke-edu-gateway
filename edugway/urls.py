@@ -17,6 +17,8 @@ Including another URLconf
 #from django.contrib import admin
 from django.conf.urls import url, include
 from rest_framework import routers
+from rest_framework_jwt import views as rf_jwt_views
+from edugway.app_auth import views as app_auth_views
 from edugway.forms import views as forms_views
 from edugway.videos import views as videos_views
 from edugway.authors import views as authors_views
@@ -39,6 +41,7 @@ content_router.register(r'course_categories',
 
 delivery_router = routers.DefaultRouter(trailing_slash=False)
 delivery_router.register(r'courses', delivery_views.CourseViewSet)
+delivery_router.register(r'users', app_auth_views.CurrentUserViewSet)
 
 # # Wire up our API using automatic URL routing.
 # # Additionally, we include login URLs for the browsable API.
@@ -47,5 +50,10 @@ urlpatterns = [
 	#url(r'^admin/', admin.site.urls),
     url(r'^content/api/', include(content_router.urls, namespace='content')),
     url(r'^delivery/api/', include(delivery_router.urls, namespace='delivery')),
+    url(r'^delivery/api/', include(
+        ([url(r'^users/api_token$', rf_jwt_views.obtain_jwt_token, 
+        name='user-api-token')], 'delivery-auth'))
+    ),
+    #url(r'^delivery/api/api_token', rf_jwt_views.obtain_jwt_token, name='user-api-token'),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]

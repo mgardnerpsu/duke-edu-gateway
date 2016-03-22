@@ -1,4 +1,3 @@
-import json
 from django.shortcuts import render
 from django.db.models import Max, Min
 from edugway import settings

@@ -19,7 +19,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'rc_1hg%u(8ewc5qh4)lq)-9elu1j+^4(ni!rp57d5tad1roi5x'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     #'django.contrib.messages',
     'django.contrib.staticfiles',
+    'edugway.app_auth',
     'rest_framework',
     'edugway.utils',
     'edugway.forms',
@@ -118,6 +119,10 @@ USE_L10N = True
 
 USE_TZ = True
 
+############################################################
+# Set the custom user model
+############################################################
+AUTH_USER_MODEL = 'app_auth.User'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
@@ -130,7 +135,15 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 25,
     'TEST_REQUEST_DEFAULT_FORMAT': 'json',
     'NON_FIELD_ERRORS_KEY': 'non_field_errors',
-    'EXCEPTION_HANDLER': 'edugway.utils.views.custom_exception_handler'
+    'EXCEPTION_HANDLER': 'edugway.utils.views.custom_exception_handler',
+    'DEFAULT_PERMISSION_CLASSES': (
+        #'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+    ),
 }
 
 ############################################################
@@ -175,4 +188,9 @@ YOUTUBE_BASE_WATCH_URL = 'https://www.youtube.com/embed'
 #############################################################
 # End YouTube API settings
 #############################################################
+
+#############################################################
+# Make monkey patches
+#############################################################
+from edugway.utils import monkey_patch
 
