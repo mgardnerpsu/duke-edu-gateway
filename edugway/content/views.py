@@ -42,9 +42,9 @@ class CourseViewSet(viewsets.ModelViewSet):
             serializer.is_valid(raise_exception=True)
             serializer.validated_data['course_id'] = course.id
             max_version = course.pub_courses.all().aggregate(
-                Max('version_number'))['version_number__max']
+                Max('version'))['version__max']
             version_number = (1 if (max_version is None) else (max_version + 1))
-            serializer.validated_data['version_number'] = version_number
+            serializer.validated_data['version'] = version_number
             # make this published course the current version
             serializer.validated_data['is_current_version'] = True
             for c in course.pub_courses.all():

@@ -1,7 +1,7 @@
 import uuid
 import collections
 from django.db import models
-from django.contrib.postgres.fields import JSONField
+from django.contrib.postgres.fields import JSONField as django_JSONField
 #from django_pgjsonb import JSONField
 # include google API apiclient resources
 from apiclient.discovery import build
@@ -28,7 +28,7 @@ class Video(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     provider = models.CharField(u'Provider', max_length=50, choices=PROVIDER_CHOICES)
     provider_id = models.CharField(u'Provider ID', max_length=50)
-    provider_resource = JSONField()
+    provider_resource_jsonb = django_JSONField()
 
     def __str__(self):
         return self.provider + '[' + self.provider_id + ']' 

@@ -7,7 +7,7 @@ from django.utils import timezone
 from rest_framework import status
 from rest_framework.test import APITestCase
 from edugway.videos.models import Video, YouTube
-from edugway.forms.models import Form
+from edugway.forms.models import Form, Field
 
 class CourseTests(APITestCase):
     # load required fixtures
@@ -18,6 +18,32 @@ class CourseTests(APITestCase):
         # set up data for the whole test case
         cls.yt = YouTube.get_service()
         cls.provider_id = 'r10kqd1HDCI' 
+
+    def create_form_fields(self, form_id, is_assessment=False):
+        # create some fields (questions)
+        for x in range(1, 6):
+            url = reverse('content:form-fields', args=[form_id])
+            data = {
+                'type': random.choice([Field.TYPE_RADIO, Field.TYPE_DROPDOWN]),
+                'label': 'A sample question?'
+                }
+            response = self.client.post(url, data)
+            assert (response.status_code == 201)
+            field_id = response.data['id']
+            # create some choices (answers)
+            for x in range(1, 5):
+                url = reverse('content:form-fields-choices', args=[field_id])
+                data = {
+                    'label': 'A sample choice'
+                    }
+                response = self.client.post(url, data)
+                assert (response.status_code == 201)
+                choice_id = response.data['id']
+                if is_assessment:
+                    url = reverse('content:field-choices-mark-correct', 
+                        args=[choice_id])
+                    response = self.client.put(url)
+                    assert (response.status_code == 200)
 
     def setUp(self):
         # setup data for each test case
@@ -63,11 +89,15 @@ class CourseTests(APITestCase):
         self.form_data = {'type': Form.TYPE_ASSESSMENT, 'title': 'sample form'}
         response = self.client.post(url, self.form_data)
         self.assessment_id = response.data['id']
+        # create assessment fields...
+        self.create_form_fields(self.assessment_id, True)
         # create a form (evaluation)
         url = reverse('content:form-list')
         self.form_data = {'type': Form.TYPE_EVALUATION, 'title': 'sample form'}
         response = self.client.post(url, self.form_data)
         self.evaluation_id = response.data['id']
+         # create evaluation fields...
+        self.create_form_fields(self.evaluation_id)
 
     def test_create_course(self):
         url = reverse('content:course-list')
@@ -215,5 +245,5 @@ class CourseTests(APITestCase):
         response = self.client.get(url, data)
         #print(json.dumps(response.data, indent=4))
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(_.pluck(response.data, 'version_number'), [3, 2, 1])
+        self.assertEqual(_.pluck(response.data, 'version'), [3, 2, 1])
         self.assertEqual(_.pluck(response.data, 'is_current_version'), [True, False, False])

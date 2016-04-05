@@ -14,6 +14,27 @@ class CategorySerializer(DynamicFieldsModelSerializer):
         model = Category
         fields = ('id', 'label', 'color', ) 
 
+class CourseCategorySerializer(DynamicFieldsModelSerializer):
+    course_id = serializers.UUIDField(write_only=True)
+    category_id = serializers.UUIDField(write_only=True)
+    course = serializers.SerializerMethodField()
+    category = CategorySerializer(many=False, read_only=True)
+
+    validators = [
+        validators.UniqueTogetherValidator(
+         queryset=CourseCategory.objects.all(),
+         fields=('course_id', 'category_id', ),
+         message='The specified category has already been associated to this course.'
+        )
+    ]
+    
+    class Meta:
+        model = CourseCategory
+        fields = ('id', 'course_id', 'course', 'category_id', 'category', ) 
+
+    def get_course(self, obj):
+        return {'id': str(obj.course.id)}
+
 class CreditSerializer(DynamicFieldsModelSerializer):
     class Meta:
         model = Credit
@@ -27,6 +48,7 @@ class CourseSerializer(DynamicFieldsModelSerializer):
     evaluation_id = serializers.UUIDField(write_only=True, required=False, allow_null=True)
     author = AuthorSerializer(many=False, read_only=True)
     categories = serializers.SerializerMethodField()
+    #categories = CourseCategorySerializer(many=True, read_only=True)
     credit = CreditSerializer(many=False, read_only=True)
     video = VideoSerializer(many=False, read_only=True)
     assessment = FormSerializer(many=False, read_only=True)
@@ -64,30 +86,9 @@ class CourseSerializer(DynamicFieldsModelSerializer):
 
         return data
 
-class CourseCategorySerializer(DynamicFieldsModelSerializer):
-    course_id = serializers.UUIDField(write_only=True)
-    category_id = serializers.UUIDField(write_only=True)
-    course = serializers.SerializerMethodField()
-    category = CategorySerializer(many=False, read_only=True)
-
-    validators = [
-        validators.UniqueTogetherValidator(
-         queryset=CourseCategory.objects.all(),
-         fields=('course_id', 'category_id', ),
-         message='The specified category has already been associated to this course.'
-        )
-    ]
-    
-    class Meta:
-        model = CourseCategory
-        fields = ('id', 'course_id', 'course', 'category_id', 'category', ) 
-
-    def get_course(self, obj):
-        return {'id': str(obj.course.id)}
-
 class PubCourseSerializer(DynamicFieldsModelSerializer):
     course = serializers.SerializerMethodField()
-    version_number = serializers.ReadOnlyField()
+    version = serializers.ReadOnlyField()
     version_on = serializers.DateTimeField(read_only=True)
     is_current_version = serializers.ReadOnlyField()
     content_jsonb = serializers.JSONField(read_only=True)
@@ -95,7 +96,7 @@ class PubCourseSerializer(DynamicFieldsModelSerializer):
     
     class Meta:
         model = PubCourse
-        fields = ('id', 'course', 'version_number', 'version_on',
+        fields = ('id', 'course', 'version', 'version_on', 
             'is_current_version', 'release_on', 'expire_on', 
             'content_jsonb', 'content_json', )
 

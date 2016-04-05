@@ -6,29 +6,33 @@ from edugway.utils.serializers import DynamicFieldsModelSerializer
 from edugway.content.models import Course, PubCourse
 
 class CourseSerializer(DynamicFieldsModelSerializer):
-
-    version_on = serializers.DateTimeField(
-            source='current_version.version_on')
-    version_number = serializers.IntegerField(
-            source='current_version.version_number')
-    content = serializers.SerializerMethodField()
+    id = serializers.UUIDField(source='course.id')
+    version = serializers.SerializerMethodField()
+    title = serializers.CharField(source='content_json.title')
+    descr = serializers.CharField(source='content_json.descr')
+    learning_objective = serializers.CharField(
+        source='content_json.learning_objective')
+    author = serializers.JSONField(source='content_json.author')
+    categories = serializers.JSONField(source='content_json.categories')
+    credit = serializers.JSONField(source='content_json.credit')
+    video = serializers.SerializerMethodField()
 
     class Meta:
         model = PubCourse
-        fields = ('id', 'version_on', 'version_number', 'content', )
+        fields = ('id', 'version', 'title', 'descr', 
+            'learning_objective', 'author', 'categories', 'credit', 
+            'video', )
 
-    def get_content(self, obj):
-        author = obj.current_version.content_json['author']
-        video = obj.current_version.content_json['video']
+    def get_video(self, obj):
+        video = obj.content_json['video']
         del video['title']
         del video['descr']
-        assessment = obj.current_version.content_json['assessment']
-        assessment = {'id': assessment['id']}
-        evaluation = obj.current_version.content_json['evaluation']
-        evaluation = {'id': evaluation['id']}
+        return video
+
+    def get_version(self, obj):
         return collections.OrderedDict([
-            ('author', author),
-            ('video', video), 
-            ('assessment', assessment),
-            ('evaluation', evaluation),
-        ])
+            ('id', obj.id),
+            ('version_number', obj.version),
+            ('version_on', obj.version_on),
+            ('is_current_version', obj.is_current_version)])
+            

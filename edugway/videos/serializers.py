@@ -27,21 +27,21 @@ class VideoSerializer(DynamicFieldsModelSerializer):
     ]
 
     def get_title(self, obj):
-        return obj.provider_resource['snippet']['title']
+        return obj.provider_resource_jsonb['snippet']['title']
 
     def get_descr(self, obj):
-        return obj.provider_resource['snippet']['description']
+        return obj.provider_resource_jsonb['snippet']['description']
 
     def get_watch_url(self, obj):
         return settings.YOUTUBE_BASE_WATCH_URL + '/' + obj.provider_id
 
     def get_duration(self, obj):
-        td = isodate.parse_duration(obj.provider_resource['contentDetails']['duration'])
+        td = isodate.parse_duration(obj.provider_resource_jsonb['contentDetails']['duration'])
         hours, remainder = divmod(td.seconds, 3600)
         minutes, seconds = divmod(remainder, 60)
         return collections.OrderedDict([('hours', hours), ('minutes', minutes), 
             ('seconds', seconds)])
 
     def get_thumbnails(self, obj):
-        return obj.provider_resource['snippet']['thumbnails']
+        return obj.provider_resource_jsonb['snippet']['thumbnails']
 

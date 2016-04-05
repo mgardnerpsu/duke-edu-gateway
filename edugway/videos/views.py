@@ -25,8 +25,8 @@ class VideoViewSet(mixins.CreateModelMixin, mixins.ListModelMixin,
 
     def perform_create(self, serializer):
         provider_id = serializer.validated_data['provider_id']
-        provider_resource = YouTube.get_video(provider_id)
-        serializer.validated_data['provider_resource'] = provider_resource
+        provider_resource_jsonb = YouTube.get_video(provider_id)
+        serializer.validated_data['provider_resource_jsonb'] = provider_resource_jsonb
         serializer.save()
 
     def get_queryset(self):

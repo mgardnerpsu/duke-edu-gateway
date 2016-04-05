@@ -147,7 +147,7 @@ REST_FRAMEWORK = {
 }
 
 ############################################################
-# Settings per Heroku guidlines
+# Settings per Heroku guidelines
 ############################################################
 
 # Parse database configuration from $DATABASE_URL

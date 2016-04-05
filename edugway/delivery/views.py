@@ -6,10 +6,16 @@ from rest_framework.response import Response
 from edugway.content.models import Course, PubCourse
 from edugway.delivery.serializers import CourseSerializer
 
-class CourseViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, 
-            viewsets.GenericViewSet):
+class SearchCourseViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     '''
-    Course resourse actions.
+    Search published courses - only search the current course version.
     '''
-    queryset = Course.objects.filter(pub_courses__is_current_version=True)
+    queryset = PubCourse.objects.filter(is_current_version=True)
+    serializer_class = CourseSerializer
+
+class CourseViewSet(viewsets.GenericViewSet):
+    '''
+    Search published courses - only search the current course version.
+    '''
+    queryset = PubCourse.objects.all()
     serializer_class = CourseSerializer

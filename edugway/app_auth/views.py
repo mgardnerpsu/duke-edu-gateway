@@ -4,6 +4,7 @@ from edugway import settings
 from rest_framework import mixins, viewsets, serializers, status 
 from rest_framework.decorators import detail_route, list_route
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 from edugway.app_auth.serializers import CurrentUserSerializer
 
 class CurrentUserViewSet(viewsets.GenericViewSet):
@@ -26,3 +27,12 @@ class CurrentUserViewSet(viewsets.GenericViewSet):
         serializer.instance.set_password(password)
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+    @list_route(methods=['GET'], permission_classes=[IsAuthenticated])
+    def profile(self, request):
+        user = get_user_model().objects.get(id=request.user.id)
+        serializer = CurrentUserSerializer(user, many=False, 
+                context={'request': request})
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+        

@@ -1,8 +1,8 @@
 import uuid
 import collections
 from django.db import models
-from django.contrib.postgres.fields import JSONField as PG_JSONField
-from jsonfield import JSONField as DJ_JSONField
+from django.contrib.postgres.fields import JSONField as pgsql_JSONField
+from jsonfield import JSONField as django_JSONField
 from edugway.authors.models import Author
 from edugway.videos.models import Video
 from edugway.forms.models import Form
@@ -86,15 +86,15 @@ class PubCourse(models.Model):
     class Meta:
         db_table = 'pub_course'
         verbose_name = u'Course'
-        ordering = ('course', '-version_number')
+        ordering = ('course', '-version')
         
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     course = models.ForeignKey(Course, on_delete=models.PROTECT, related_name='pub_courses')
+    version = models.IntegerField(u'Pub Version')
     version_on = models.DateTimeField(u'Pub Version Date', auto_now_add=True)
-    version_number = models.IntegerField(u'Pub Version')
     is_current_version = models.BooleanField(u'Current Pub Version')
     release_on = models.DateTimeField(u'Pub Release Date')
     expire_on = models.DateTimeField(u'Pub Expire Date')
-    content_jsonb = PG_JSONField()
-    content_json = DJ_JSONField(load_kwargs={'object_pairs_hook': collections.OrderedDict})
+    content_jsonb = pgsql_JSONField()
+    content_json = django_JSONField(load_kwargs={'object_pairs_hook': collections.OrderedDict})
 

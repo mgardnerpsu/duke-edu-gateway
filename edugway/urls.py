@@ -40,8 +40,8 @@ content_router.register(r'course_categories',
         content_views.CourseCategoryViewSet, base_name='course-categories')
 
 delivery_router = routers.DefaultRouter(trailing_slash=False)
-delivery_router.register(r'courses', delivery_views.CourseViewSet)
-delivery_router.register(r'users', app_auth_views.CurrentUserViewSet)
+delivery_router.register(r'courses', delivery_views.SearchCourseViewSet)
+delivery_router.register(r'current_user', app_auth_views.CurrentUserViewSet)
 
 # # Wire up our API using automatic URL routing.
 # # Additionally, we include login URLs for the browsable API.
@@ -51,7 +51,7 @@ urlpatterns = [
     url(r'^content/api/', include(content_router.urls, namespace='content')),
     url(r'^delivery/api/', include(delivery_router.urls, namespace='delivery')),
     url(r'^delivery/api/', include(
-        ([url(r'^users/api_token$', rf_jwt_views.obtain_jwt_token, 
+        ([url(r'^current_user/api_token$', rf_jwt_views.obtain_jwt_token, 
         name='user-api-token')], 'delivery-auth'))
     ),
     #url(r'^delivery/api/api_token', rf_jwt_views.obtain_jwt_token, name='user-api-token'),

@@ -26,7 +26,7 @@ class CurrentUserTests(APITestCase):
             'confirm_password': 'new_Password_1'
         }
         response = self.client.post(url, data)
-        print(json.dumps(response.data, indent=4))
+        #print(json.dumps(response.data, indent=4))
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(
         	get_user_model().objects.get(username='user0001').has_usable_password(), True)
@@ -43,6 +43,14 @@ class CurrentUserTests(APITestCase):
             'password': 'new_Password_1',
         }
         response = self.client.post(url, data)
-        print(json.dumps(response.data, indent=4))
+        #print(json.dumps(response.data, indent=4))
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        # get the users profile
+        user = get_user_model().objects.get(username='user0001')
+        self.client.force_authenticate(user=user)
+        url = reverse('delivery:user-profile')
+        response = self.client.get(url)
+        #print(json.dumps(response.data, indent=4))
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
