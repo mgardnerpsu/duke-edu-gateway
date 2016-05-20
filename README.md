@@ -1,2 +1,2 @@
 # duke-edu-gateway
-The Duke University Education Gateway
+The Education Gateway Prototype
