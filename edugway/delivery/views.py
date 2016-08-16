@@ -15,7 +15,7 @@ class SearchCourseViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
 
 class CourseViewSet(viewsets.GenericViewSet):
     '''
-    Search published courses - only search the current course version.
+    Course delivery (workflow) actions.
     '''
     queryset = PubCourse.objects.all()
     serializer_class = CourseSerializer

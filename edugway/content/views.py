@@ -75,7 +75,7 @@ class CategoryViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin,
 class CourseCategoryViewSet(mixins.RetrieveModelMixin, mixins.DestroyModelMixin, 
             viewsets.GenericViewSet):
     '''
-    Course categories (questions) resourse actions.
+    Course categories resourse actions.
     '''
     queryset = CourseCategory.objects.all()
     serializer_class = CourseCategorySerializer

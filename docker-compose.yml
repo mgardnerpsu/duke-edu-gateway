@@ -1,0 +1,15 @@
+version: '2'
+services:
+  db:
+    env_file: /vagrant/conf/edugway.db.env
+    image: postgres
+  web:
+    env_file: /vagrant/conf/edugway.web.env
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db

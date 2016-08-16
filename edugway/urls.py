@@ -40,7 +40,8 @@ content_router.register(r'course_categories',
         content_views.CourseCategoryViewSet, base_name='course-categories')
 
 delivery_router = routers.DefaultRouter(trailing_slash=False)
-delivery_router.register(r'courses', delivery_views.SearchCourseViewSet)
+delivery_router.register(r'courses', 
+        delivery_views.SearchCourseViewSet, base_name='course')
 delivery_router.register(r'current_user', app_auth_views.CurrentUserViewSet)
 
 # # Wire up our API using automatic URL routing.
